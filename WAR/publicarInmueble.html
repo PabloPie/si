@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+<title>Publicar nuevo inmueble</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--<link rel="stylesheet" href="assets/css/main.css" />-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/infoInmueble.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#mi-navbar"
+					aria-expanded="false">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Jaus</a>
+			</div>
+			<div class="collapse navbar-collapse" id="mi-navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+							Mi cuenta</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="page-header">
+					<h1>Publicar nuevo anuncio</h1>
+				</div>
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>Informacion del piso</legend>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="precio">Precio:</label>
+							<div class="col-md-5">
+								<input id="precio" type="number" class="form-control" placeholder="Precio en euros">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="superficie">Superficie:</label>
+							<div class="col-md-5">
+								<input id="superficie" type="number" class="form-control" placeholder="Superficie en metros cuadrados">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="num-habitaciones">Numero de habitaciones:</label>
+							<div class="col-md-5">
+								<input id="num-habitaciones" type="number" class="form-control" placeholder="Numero de habitaciones">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="num-bagnos">Numero de baños:</label>
+							<div class="col-md-5">
+								<input id="num-bagnos" type="number" class="form-control" placeholder="Numero de baños">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="planta">Planta:</label>
+							<div class="col-md-5">
+								<input id="planta" type="number" class="form-control" placeholder="Planta">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="planta">Planta:</label>
+							<div class="col-md-5">
+								<input id="planta" type="number" class="form-control" placeholder="Planta">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Que:</label>
+							<div class="col-md-5">
+								<label class="radio-inline"><input type="radio" name="vendeAlquila">Se vende</label>
+								<label class="radio-inline"><input type="radio" name="vendeAlquila">Se alquila</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Imagenes:</label>
+							<div class="col-md-5">
+								<input type="file" id="input" multiple="multiple">
+							</div>
+						</div>
+						<fieldset>
+							<legend>Localizacion del piso</legend>
+							<div class="form-group">
+	 				 		 	<label class="col-md-4 control-label" for="pais">Pais:</label>
+	 				 		 	<div class="col-md-5">
+									<select class="form-control" id="pais">
+									    <option>España</option>
+									    <option>Rumania</option>
+								  	</select>
+								</div>
+							</div>
+							<div class="form-group">
+	 				 		 	<label class="col-md-4 control-label" for="provincia">Provincia:</label>
+	 				 		 	<div class="col-md-5">
+									<select class="form-control" id="pais">
+									    <option>Huesca</option>
+									    <option>Zaragoza</option>
+									    <option>Teruel</option>
+								  	</select>
+								</div>
+							</div>
+							<div class="form-group">
+	 				 		 	<label class="col-md-4 control-label" for="poblacion">Poblacion:</label>
+	 				 		 	<div class="col-md-5">
+									<input class="form-control" type="text" id="poblacion" placeholder="Poblacion">
+								</div>
+							</div>
+							<div class="form-group">
+	 				 		 	<label class="col-md-4 control-label" for="tipo-via">Tipo de via:</label>
+	 				 		 	<div class="col-md-5">
+									<select class="form-control" id="tipo-via">
+									    <option>Calle</option>
+									    <option>Avenida</option>
+									    <option>Plaza</option>
+								  	</select>
+								</div>
+							</div>
+							<div class="form-group">
+	 				 		 	<label class="col-md-4 control-label" for="poblacion">Nombre calle:</label>
+	 				 		 	<div class="col-md-5">
+									<input class="form-control" type="text" id="nombre-calle" placeholder="Nombre de la calle">
+								</div>
+							</div>
+							<div class="form-group">
+	 				 		 	<label class="col-md-4 control-label" for="poblacion">Numero:</label>
+	 				 		 	<div class="col-md-5">
+									<input class="form-control" type="number" id="nombre-calle" placeholder="Numero de la via">
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<legend>Extras</legend>
+							<div class="form-group col-md-12">
+								<label class="checkbox-inline"><input type="checkbox" value="">Piscina</label>
+								<label class="checkbox-inline"><input type="checkbox" value="">Aire acondicionado</label>
+							</div>
+						</fieldset>
+						<fieldset>
+							<legend>Descripcion</legend>
+							<div class="col-md-12">
+								<div class="form-group">
+									<textarea class="form-control" id="id-mensaje" rows="3"></textarea>
+								</div>
+								<div class="form-group">
+									<input type="submit" class="form-control" id="id-publicar">
+								</div>
+							</div>
+						</fieldset>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<footer class="container text-center">
+			<p>Informacion de contacto y ayuda</p>
+		</footer>
+	</div>
+</body>
+</html>
