@@ -178,8 +178,7 @@
                                     <% List<ExtrasVO> extras = ExtrasDAO.
                                             getAllExtras(GestorDeConexionesBD.getConnection());
                                        for (ExtrasVO e : extras) {
-                                           out.println("<label name=\"extras\" class=\"checkbox-inline\"><input type=\"checkbox\" value=\"\">"
-                                            + e.getNombre()  + "</label>");
+                                           out.println("<label class=\"checkbox-inline\"><input name=\"extras\" type=\"checkbox\" value=\"" + e.getNombre() + "\">" + e.getNombre() + "</label>");
                                     }%>
                             </div>
                         </fieldset>
