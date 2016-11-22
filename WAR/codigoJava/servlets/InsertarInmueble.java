@@ -24,6 +24,30 @@ public class InsertarInmueble extends HttpServlet {
         response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
+    private List<String> getImagesPartsAndWriteThem(Collection<Part> parts) {
+        List<String> namesList = new ArrayList<>();
+        Iterator<Part> it = parts.iterator();
+        ArrayList<Part> imagesParts = new ArrayList<>();
+        while (it.hasNext()) {
+            Part aux = it.next();
+            if (aux.getName().equals("imagen"))
+                imagesParts.add(aux);
+        }
+        int i = 0;
+        for (Part p : imagesParts) {
+            // TODO: asegurarse que no existe otro fichero con el mismo nombre
+            // TODO: añadir extensiones a los ficheros
+            String uuid = UUID.randomUUID().toString();
+            namesList.add(uuid);
+            try {
+                p.write(uuid);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return namesList;
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String precio = request.getParameter("precio");
@@ -33,7 +57,7 @@ public class InsertarInmueble extends HttpServlet {
         String planta = request.getParameter("planta");
         String tipoInmueble = request.getParameter("tipo-inmueble");
         String vendeAlquila = request.getParameter("vendeAlquila");
-
+        List<String> nombreImagenes = getImagesPartsAndWriteThem(request.getParts());
         String pais = request.getParameter("pais");
         String provincia = request.getParameter("provincia");
         String poblacion = request.getParameter("poblacion");
@@ -42,7 +66,7 @@ public class InsertarInmueble extends HttpServlet {
         String numeroCalle = request.getParameter("numero-calle");
         String extras[] = request.getParameterValues("extras");
         String descripcion = request.getParameter("descripcion");
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "precio: " + extras[0] + extras[1]);
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "precio: ");
     }
 
 }

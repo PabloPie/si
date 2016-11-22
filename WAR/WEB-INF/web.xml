@@ -10,6 +10,8 @@
     <servlet-name>InsertarInmueble</servlet-name>
     <servlet-class>servlets.InsertarInmueble</servlet-class>
     <multipart-config>
+        <!-- Las imagenes se descargan en este directorio que se encuentra en la raiz-->
+        <location>/imagenesSubidas</location> 
     </multipart-config>
 </servlet>
 <servlet-mapping>

@@ -112,7 +112,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Imagenes:</label>
                             <div class="col-md-5">
-                                <input type="file" id="input" multiple="multiple">
+                                <input name="imagen" type="file" id="input" multiple="multiple">
                             </div>
                         </div>
                         <fieldset>
