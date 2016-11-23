@@ -7,7 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.UUID;
+import java.util.Iterator;
+import java.util.Collection;
+
 
 /**
  * Servlet implementation class InsertarInmueble
