@@ -6,7 +6,8 @@
 # Package Files #
 *.jar
 #no ignorar librerias necesarias como el driver de mysql
-!WAR/WEB-INF/lib/* 
+!web/WEB-INF/lib/*
+out/
 *.war
 *.ear
 #ignorar la puta basura de idea
