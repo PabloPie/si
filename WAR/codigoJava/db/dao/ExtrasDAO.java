@@ -11,23 +11,21 @@ import db.vo.ExtrasVO;
 
 public class ExtrasDAO {
 
-	public static List<ExtrasVO> getExtras(int idExtra, Connection connection) {
-		List<ExtrasVO> listaExtras = new ArrayList<ExtrasVO>();
+	public static ExtrasVO getExtras(int idExtra, Connection connection) {
+		ExtrasVO extra = null;
 		String query = "SELECT nombre  FROM extras WHERE idExtras = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, idExtra);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				int idExt = resultSet.getInt(Tablas.Extras.ID_EXTRAS);
-				String nombreExtra = resultSet.getString(Tablas.Extras.NOMBRE);
-				listaExtras.add(new ExtrasVO(idExt, nombreExtra));
-			}
+			int idExt = resultSet.getInt(Tablas.Extras.ID_EXTRAS);
+			String nombreExtra = resultSet.getString(Tablas.Extras.NOMBRE);
+			 extra = new ExtrasVO(idExtra,nombreExtra);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return listaExtras;
+		return extra;
 	}
 
 	public static List<ExtrasVO> getAllExtras(Connection connection) {

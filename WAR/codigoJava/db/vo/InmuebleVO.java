@@ -1,8 +1,9 @@
 package db.vo;
 
+import java.util.List;
+
 /**
  * Clase que representa un inmueble
- * 
  */
 public class InmuebleVO {
     private int idInmueble;
@@ -17,11 +18,13 @@ public class InmuebleVO {
     private TipoInmuebleVO idTipoInmueble;
     private UsuarioRegistradoVO idUsuario;
     private LocalizacionVO localizacion;
+    private List<ExtrasVO> extras;
+
 
     public InmuebleVO(int idInmueble, double precio, int superficie,
-            int planta, int numHabitaciones, int numBagnos, String descripcion,
-            boolean seVende, boolean seAlquila, TipoInmuebleVO idTipoInmueble,
-            UsuarioRegistradoVO idUsuario, LocalizacionVO localizacion) {
+                      int planta, int numHabitaciones, int numBagnos, String descripcion,
+                      boolean seVende, boolean seAlquila, TipoInmuebleVO idTipoInmueble,
+                      UsuarioRegistradoVO idUsuario, LocalizacionVO localizacion, List<ExtrasVO> extras) {
         this.idInmueble = idInmueble;
         this.precio = precio;
         this.superficie = superficie;
@@ -34,6 +37,8 @@ public class InmuebleVO {
         this.idTipoInmueble = idTipoInmueble;
         this.idUsuario = idUsuario;
         this.localizacion = localizacion;
+        this.extras = extras;
+
     }
 
     public int getIdInmueble() {
@@ -131,5 +136,9 @@ public class InmuebleVO {
     public void setLocalizacion(LocalizacionVO localizacion) {
         this.localizacion = localizacion;
     }
+
+    public List<ExtrasVO> getExtras() { return extras; }
+
+    public void setExtras(List<ExtrasVO> extras) { this.extras = extras; }
 
 }

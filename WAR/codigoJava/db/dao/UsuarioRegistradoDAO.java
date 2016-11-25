@@ -22,7 +22,7 @@ public class UsuarioRegistradoDAO {
             String queryString = "INSERT INTO usuario_registrado "
                     + "(idusuario, nombre, apellidos, email, telefono, contraseña, fecha, idpais,"
                     + "idprovincia, poblacion, nombredir, numerodir, idvia) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement preparedStatement = connection
                     .prepareStatement(queryString);
