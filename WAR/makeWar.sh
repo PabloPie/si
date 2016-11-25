@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# script sencillo para crear el .war
+# script no tan sencillo para crear el .war
 
 TOMCATBASE="../../apache-tomcat-7.0.73" # modificar cuando tomcat este situado en otro lado
 TOMCATLIB="${TOMCATBASE}/lib/*"

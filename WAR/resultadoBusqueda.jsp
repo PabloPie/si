@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<%@ page import="db.vo.*,db.dao.*,java.util.*"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>

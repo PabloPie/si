@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.vo.ExtrasVO;
+import db.vo.InmuebleHasExtrasVO;
 import db.vo.InmuebleVO;
 
 public class InmuebleDAO {
@@ -52,8 +54,8 @@ public class InmuebleDAO {
 
     }
 
-    public static List<InmuebleVO> getInmuebles(int idInm, Connection connection) {
-    List<InmuebleVO> listaInmuebles = new ArrayList<InmuebleVO>();
+    public static InmuebleVO getInmuebles(int idInm, Connection connection) {
+    InmuebleVO listaInmuebles = null;
     String query = "SELECT * FROM inmueble WHERE idInmueble = ?";
     try {
         PreparedStatement preparedStatement = connection
@@ -87,7 +89,12 @@ public class InmuebleDAO {
             .getString(Tablas.Inmueble.NOMBRE_DIR);
         int numeroDir = resultSet.getInt(Tablas.Inmueble.NUMERO_DIR);
         int idVia = resultSet.getInt(Tablas.Inmueble.ID_VIA);
-        listaInmuebles.add(new InmuebleVO(idInmueble, precio,
+        List<InmuebleHasExtrasVO> inmExtras = InmuebleHasExtrasDAO.getExtrasInmueble(idInm,connection);
+            List<ExtrasVO> extras = new ArrayList<>();
+            for(InmuebleHasExtrasVO e: inmExtras){
+                extras.add(ExtrasDAO.getExtras(e.getIdExtras(),connection));
+            }
+            listaInmuebles = new InmuebleVO(idInmueble, precio,
             superficie, planta, numHabitaciones, numBagnos,
             descripcion, seVende, seAlquila, TipoInmuebleDAO
                 .getTipoInmuebleById(idTipoInmueble, connection),
@@ -95,7 +102,7 @@ public class InmuebleDAO {
                 connection), LocalizacionDAO
                 .obtenerLocalizacion(idPais, idProvincia,
                     poblacion, nombreDir, numeroDir, idVia,
-                    connection)));
+                    connection),extras);
         }
     } catch (SQLException e) {
         e.printStackTrace();
@@ -103,7 +110,7 @@ public class InmuebleDAO {
 
     return listaInmuebles;
     }
-
+    /**
     public static List<InmuebleVO> getInmuebles(String palabraBusqueda,
         int precioMin, int precioMax, int superficieMin, int superficieMax,
         Connection connection) {
@@ -156,4 +163,5 @@ public class InmuebleDAO {
 
     return listaInmuebles;
     }
+     **/
 }
