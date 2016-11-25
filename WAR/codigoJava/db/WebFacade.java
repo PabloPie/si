@@ -24,7 +24,7 @@ public class WebFacade {
 
 	public void crearPais(PaisVO pais) throws SQLException{
 		Connection connection = null;
-		System.out.println("Inicio creación de usuario...");	
+		System.out.println("Inicio creación de pais...");
 		try{
 			connection = GestorDeConexionesBD.getConnection();
 			PaisDAO paisDAO = new PaisDAO();
