@@ -22,7 +22,7 @@ public class UsuarioRegistradoDAO {
             String queryString = "INSERT INTO usuario_registrado "
                     + "(idusuario, nombre, apellidos, email, telefono, contraseña, fecha, idpais,"
                     + "idprovincia, poblacion, nombredir, numerodir, idvia) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement preparedStatement = connection
                     .prepareStatement(queryString);
@@ -64,11 +64,27 @@ public class UsuarioRegistradoDAO {
         }
     }
 
+    public static boolean validarUsuario(String usuario, String password, Connection connection){
+        boolean encontrado=false;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("Select idusuario,contraseña from usuario_registrado where idusuario=? and contraseña=?");
+            preparedStatement.setString(1, usuario);
+            preparedStatement.setString(2, password);
+            ResultSet res = preparedStatement.executeQuery();
+            if(res.next()){
+                encontrado = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return encontrado;
+    }
+
     public static void actualizarUsuario(UsuarioRegistradoVO usuario,
             Connection connection) {
         try {
             /* Create "preparedStatement". */
-            String queryString = "UPDATE usuario "
+            String queryString = "UPDATE usuario_registrado "
                     + "SET nombre = ?, apellidos = ?, email = ?, telefono = ?, "
                     + " contraseña = ?, fecha = ?, idpais = ?, idprovincia = ?, poblacion = ?, nombredir = ?,"
                     + "numerodir = ?, idvia = ? WHERE  idusuario = ?)";
@@ -118,7 +134,7 @@ public class UsuarioRegistradoDAO {
         try {
             /* Create "preparedStatement". */
             String queryString = "SELECT nombre, apellidos, email, telefono, contraseña, fecha, idpais,"
-                    + "idprovincia, poblacion, nombredir, numerodir, idvia WHERE  idusuario = ?";
+                    + "idprovincia, poblacion, nombredir, numerodir, idvia from usuario_registrado WHERE  idusuario = ?";
             PreparedStatement preparedStatement = connection
                     .prepareStatement(queryString);
 

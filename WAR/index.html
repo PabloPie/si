@@ -9,14 +9,22 @@
 		<title>Jaus</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		
+
 	</head>
 	<body>
-		<button class="regBut"  onclick="show()">Registrarse</button>
+		<button type="button" class="regBut" data-toggle="modal" data-target="#myModal">
+			Registrarse
+		</button>
 			<!-- Header -->
 		<header id="header">
 			<h1 align="center">Jaus</h1>
@@ -26,7 +34,7 @@
 		<!-- Signup Form -->
 		<form id="signup-form" method="post" action="#">
 			<fieldset>
-				<legend>Me interesa:</legend>
+				<legend style="color:white">Me interesa:</legend>
 				<input type="radio" name="Selector" id="idComprar"/><label for="idComprar">Comprar</label>
 				<input type="radio" name="Selector" id="idAlquilar"/><label for="idAlquilar">Alquilar</label>
 			</fieldset>
@@ -36,32 +44,38 @@
 			<!--<form action="A:\Mis Documentos\Escritorio\Sync\Universidad\SIstemas de Información\Website\Página registro\HTML1.html">
    	 			<input type="submit" id="regBut" value="Registrarse" />
 			</form>-->
-			
 
-			<div class="register" style="display:none;">
-			<footer></footer>
-				<div class="pane">
-					<form action="http://miservidor:8080/..." method="POST">
- 						<label for="IDNombre">Nombre*</label><input type="text" name="Nombre" id="IDNombre"/><br/>
- 						<label for="IDApellido">Apellido*</label><input type="text" name="Apellido" id="IDApellido"/><br/>
- 		
- 						<label for="IDmail">E-mail*:</label><input type="email" name="Mail" id="IDMail"/><br/>
- 						<label for="IDREmail">Repite E-mail*:</label><input type="email" name="REMail" id="IDREMail"/><br/>
 
- 						<label for="IDPass">Contraseña*:</label><input type="password" name="Pass" id="IDPass"/><br/>
- 						<label for="IDREPass">Repite Contraseña*:</label><input type="password" name="REPass" id="IDREPass"/><br/>
 
- 						<p>*Nota: todos los campos son obligatorios</p>
- 						<div align="center">
- 							<input type="submit" value="Registrarse"/>
- 							<a href=""  class="cancelReg"  onclick="hide()">Cancelar</a>
- 							<!--<input type="reset"/>-->
- 						</div>
+		<!-- Modal -->
+		<div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" style="background-color:black">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Formulario de Registro</h4>
+					</div>
+					<div class="modal-body">
+						<form action="http://miservidor:8080/..." method="POST">
+							<label for="IDNombre">Nombre*</label><input type="text" name="Nombre" id="IDNombre"/><br/>
+							<label for="IDApellido">Apellido*</label><input type="text" name="Apellido" id="IDApellido"/><br/>
 
-					</form>
-					<!--<button type="submit" class="btn btn-default btn-primary btn-block" value="Login">Login</button><br>-->
+							<label for="IDmail">E-mail*:</label><input type="email" name="Mail" id="IDMail"/><br/>
+							<label for="IDREmail">Repite E-mail*:</label><input type="email" name="REMail" id="IDREMail"/><br/>
+
+							<label for="IDPass">Contraseña*:</label><input type="password" name="Pass" id="IDPass"/><br/>
+							<label for="IDREPass">Repite Contraseña*:</label><input type="password" name="REPass" id="IDREPass"/><br/>
+
+							<p>*Nota: todos los campos son obligatorios</p>
+						</form>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="cancelReg">Registrarse</button>
+					</div>
 				</div>
 			</div>
+		</div>
 
 
 
@@ -81,14 +95,7 @@
 
 		<!-- Scripts -->
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js">			 
-				function show (){
-   					 document.getElementByClassName("register").style.display = "block";
-  				}
-  				function hide () {
-   					document.getElementByClassName("register").style.display = "none";
-  				}
-			</script>
+			<script src="assets/js/main.js"></script>
 
 	</body>
 </html>
