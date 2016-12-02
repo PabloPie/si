@@ -7,6 +7,8 @@ import db.vo.*;
 
 public class WebFacade {
 
+
+
 	public void crearCliente(UsuarioRegistradoVO usuario)throws SQLException {    
 		Connection connection = null;
 		System.out.println("Inicio creación de usuario...");		
@@ -36,7 +38,7 @@ public class WebFacade {
 		}
 	}
 
-	public static void main (String[] args) {    
+	public static void main (String[] args) {
 	   	WebFacade fachada = new WebFacade();
 		//UsuarioRegistradoVO usuario = new UsuarioRegistradoVO("Elblopo","Caca","Futi","qwerty",976000000,"emilio@emilio",LocalDate.now(),null);
 		PaisVO pais = new PaisVO(1,"España");
@@ -46,7 +48,7 @@ public class WebFacade {
 			fachada.crearPais(pais);
 	    }catch (Exception e){
 			e.printStackTrace(System.err);
-		}	
-	}  
+		}
+	}
 }
 

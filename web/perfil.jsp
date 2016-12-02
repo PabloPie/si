@@ -1,3 +1,7 @@
+<%@ page import="db.dao.UsuarioRegistradoDAO" %>
+<%@ page import="db.vo.UsuarioRegistradoVO" %>
+<%@ page import="db.dao.GestorDeConexionesBD" %>
+<%@ page import="java.sql.SQLException" %>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -28,7 +32,15 @@
   </head>
 
   <body>
+  <%
+    String usuario = request.getParameter("usuario");
+      try{
+          UsuarioRegistradoVO user = UsuarioRegistradoDAO.encontrarDatosUsuario(usuario, GestorDeConexionesBD.getConnection());
+      }catch(SQLException e){
+          e.printStackTrace();
+  }
 
+  %>
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -68,7 +80,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="idnombre">Nombre</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="Pepito" id="idnombre" class="form-control">
+              <input type="text" placeholder="Pepito" value="<%=user.getNombre();%>" id="idnombre" class="form-control">
             </div>
           </div>
 
@@ -76,7 +88,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="idapellidos">Apellidos</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="García García" id="idapellidos" class="form-control">
+              <input type="text" placeholder="García García" value="<%=user.getApellidos();%>" id="idapellidos" class="form-control">
             </div>
           </div>
 
@@ -84,7 +96,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="idemail">Email</label>
             <div class="col-sm-10">
-              <input type="email" placeholder="pepito@correopepito.com" id="idemail" class="form-control">
+              <input type="email" value="<%=user.getEmail();%>"  placeholder="pepito@correopepito.com" id="idemail" class="form-control">
             </div>
           </div>
 
