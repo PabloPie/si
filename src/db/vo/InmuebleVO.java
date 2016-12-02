@@ -19,12 +19,17 @@ public class InmuebleVO {
     private UsuarioRegistradoVO idUsuario;
     private LocalizacionVO localizacion;
     private List<ExtrasVO> extras;
+    private List<ImagenVO> imagenes;
 
+    public InmuebleVO() {
+
+    }
 
     public InmuebleVO(int idInmueble, double precio, int superficie,
                       int planta, int numHabitaciones, int numBagnos, String descripcion,
                       boolean seVende, boolean seAlquila, TipoInmuebleVO idTipoInmueble,
-                      UsuarioRegistradoVO idUsuario, LocalizacionVO localizacion, List<ExtrasVO> extras) {
+                      UsuarioRegistradoVO idUsuario, LocalizacionVO localizacion, 
+                      List<ExtrasVO> extras, List<ImagenVO> imagenes) {
         this.idInmueble = idInmueble;
         this.precio = precio;
         this.superficie = superficie;
@@ -38,7 +43,7 @@ public class InmuebleVO {
         this.idUsuario = idUsuario;
         this.localizacion = localizacion;
         this.extras = extras;
-
+        this.imagenes = imagenes;
     }
 
     public int getIdInmueble() {
@@ -137,8 +142,20 @@ public class InmuebleVO {
         this.localizacion = localizacion;
     }
 
-    public List<ExtrasVO> getExtras() { return extras; }
+    public List<ExtrasVO> getExtras() {
+        return extras;
+    }
 
-    public void setExtras(List<ExtrasVO> extras) { this.extras = extras; }
+    public void setExtras(List<ExtrasVO> extras) { 
+        this.extras = extras; 
+    }
+
+    public List<ImagenVO> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<ImagenVO> imagenes) {
+        this.imagenes = imagenes; 
+    }
 
 }

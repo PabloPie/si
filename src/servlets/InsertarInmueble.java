@@ -51,13 +51,22 @@ public class InsertarInmueble extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //TODO: cambiar el usuario cuando tengamos login gestionado
+        UsuarioRegistradoVO usuarioDePrueba = null;
         String precio = request.getParameter("precio");
         String superficie = request.getParameter("superficie");
         String numHabitaciones = request.getParameter("num-habitaciones");
         String numBagnos = request.getParameter("num-bagnos");
         String planta = request.getParameter("planta");
         String tipoInmueble = request.getParameter("tipo-inmueble");
+        int idTipoInmuelbe = Integer.parseInt(tipoInmueble);
+
         String vendeAlquila = request.getParameter("vendeAlquila");
+        boolean seVende = false;
+        if (vendeAlquila.equals("vende")) {
+           seVende = true; 
+        } 
+
         List<String> nombreImagenes = getImagesPartsAndWriteThem(request.getParts());
         String pais = request.getParameter("pais");
         String provincia = request.getParameter("provincia");
@@ -67,6 +76,32 @@ public class InsertarInmueble extends HttpServlet {
         String numeroCalle = request.getParameter("numero-calle");
         String extras[] = request.getParameterValues("extras");
         String descripcion = request.getParameter("descripcion");
+
+        Connection connection = GestorDeConexionesiBD.getConnection();
+        InmuebleVO inmuebleVO = new InmuebleVO();
+        inmuebleVO.setPrecio(precio);
+        inmuebleVO.setSuperficie(superficie);
+        inmuebleVO.setPlanta(planta);
+        inmuebleVO.setNumHabitaciones(numHabitaciones);
+        inumebleVO.setNumBagnos(numBagnos);
+        inmuebleVO.setDescripcion(descripcion);
+        inmuebleVO.seVende(seVende);
+        inmuebleVO.seAlquila(!seVende);
+        TipoInmuebleVO tipoInmuebleVO = TipoInmuebleDao.getTipoInmuebleById(idTipoInmueble, connection);
+        // TODO: codigo de prueba, cambiar luego porque no puedo compilar ahora
+        int idPais = 0;
+        int idProvincia = 0;
+        int numDir = Integer.parseInt(numeroCalle);
+        int idVia = Integer.parseInt(tipoVia); 
+        LocalizacionVO localizacionVO = LocalizacionDAO.obtenerLocalizacion(idPais, idProvincia, poblacion, );
+        List<ExtrasVO> listaExtras =  ExtrasDAO.k
+        inmuebleVO.setIdTipoInmueble(tipoInmuebleVO);
+        inmuebleVO.setUsuarioRegistrado(usuarioRegistrado);
+        inmuebleVO.setLocalizacion(localizacionVO);
+        inmuebleVO.setExtras();
+        inmuebleVO.setImagenes();
+
+
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "precio: ");
     }
 
