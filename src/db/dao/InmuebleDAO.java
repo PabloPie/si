@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.vo.ExtrasVO;
-import db.vo.InmuebleHasExtrasVO;
-import db.vo.InmuebleVO;
+import db.vo.*;
 
 public class InmuebleDAO {
 
@@ -97,7 +95,7 @@ public class InmuebleDAO {
                 LocalizacionVO localizacionVO = LocalizacionDAO.obtenerLocalizacion(idPais, idProvincia, poblacion, nombreDir, numeroDir, idVia, connection);
                 List<ImagenVO> imagenesVO = ImagenDAO.getImagenes(idInm, connection);
                 listaInmuebles = new InmuebleVO(idInmueble, precio, superficie, planta, numHabitaciones, numBagnos,
-                        descripcion, seVende, seAlquila, tipoInmuebleVO, usuarioRegistradoVO, localizacionVOi, extras);
+                        descripcion, seVende, seAlquila, tipoInmuebleVO, usuarioRegistradoVO, localizacionVO, extras);
             }
         } catch (SQLException e) {
             e.printStackTrace();
