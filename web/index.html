@@ -25,6 +25,10 @@
 
 	</head>
 	<body>
+		<button type="button" class="regBut2" data-toggle="modal" data-target="#myModalIS">
+			Iniciar Sesión
+		</button>
+
 		<button type="button" class="regBut" data-toggle="modal" data-target="#myModal">
 			Registrarse
 		</button>
@@ -48,8 +52,6 @@
    	 			<input type="submit" id="regBut" value="Registrarse" />
 			</form>-->
 
-
-
 		<!-- Modal -->
 		<div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -59,22 +61,45 @@
 					</div>
 					<div class="modal-body">
 						<form action="http://miservidor:8080/..." method="POST">
-							<label for="IDNombre">Nombre*</label><input type="text" name="Nombre" id="IDNombre"/><br/>
-							<label for="IDApellido">Apellido*</label><input type="text" name="Apellido" id="IDApellido"/><br/>
+							<label for="IDNombre">Nombre</label><input type="text" name="Nombre" id="IDNombre"/><br/>
+							<label for="IDApellido">Apellido</label><input type="text" name="Apellido" id="IDApellido"/><br/>
 
-							<label for="IDmail">E-mail*:</label><input type="email" name="Mail" id="IDMail"/><br/>
-							<label for="IDREmail">Repite E-mail*:</label><input type="email" name="REMail" id="IDREMail"/><br/>
+							<label for="IDmail">E-mail:</label><input type="email" name="Mail" id="IDMail"/><br/>
+							<label for="IDREmail">Repite E-mail:</label><input type="email" name="REMail" id="IDREMail"/><br/>
 
-							<label for="IDPass">Contraseña*:</label><input type="password" name="Pass" id="IDPass"/><br/>
-							<label for="IDREPass">Repite Contraseña*:</label><input type="password" name="REPass" id="IDREPass"/><br/>
+							<label for="IDPass">Contraseña:</label><input type="password" name="Pass" id="IDPass"/><br/>
+							<label for="IDREPass">Repite Contraseña:</label><input type="password" name="REPass" id="IDREPass"/><br/>
 
-							<p>*Nota: todos los campos son obligatorios</p>
+							<p>Nota: todos los campos son obligatorios</p>
 						</form>
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="cancelReg">Registrarse</button>
+						<button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="acceptReg">Registrarse</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal iniciar sesion -->
+		<div class="modal fade"  id="myModalIS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" style="background-color:black">
+					<div class="modal-header">
+						<h4 class="modal-title" id="ModalIS">Iniciar sesión:</h4>
+					</div>
+					<div class="modal-body">
+						<form action="http://miservidor:8080/..." method="POST">
+							<label for="IDUsuario">Usuario</label><input type="text" name="User" id="IDUsuario"/><br/>
+							<label for="IDPassword">Contraseña</label><input type="text" name="Password" id="IDPassword"/><br/>
+
+						</form>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="acceptReg">Entrar</button>
 					</div>
 				</div>
 			</div>
