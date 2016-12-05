@@ -9,7 +9,7 @@ public class Tablas {
     public static class Imagenes {
         public static final int ID_INMUEBLE = 1;
         public static final int ID_IMAGEN = 2;
-        public static final int RUTA = 2;
+        public static final int RUTA = 3;
 
     }
 

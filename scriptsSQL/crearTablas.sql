@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `jaus`.`inmueble` (
   `descripcion` VARCHAR(200) NULL,
   `sevende` TINYINT(1) NULL,
   `sealquila` TINYINT(1) NULL,
-  `tipoInmueble` INT NOT NULL,
+  `idTipo` INT NOT NULL,
   `idusuario` VARCHAR(45) NOT NULL,
   `idpais` INT NOT NULL,
   `idprovincia` INT NOT NULL,
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `jaus`.`inmueble` (
   `idvia` INT NOT NULL,
   PRIMARY KEY (`idInmueble`),
   CONSTRAINT `fk_inmueble_TipoInmueble1`
-    FOREIGN KEY (`tipoInmueble`)
+    FOREIGN KEY (`idTipo`)
     REFERENCES `jaus`.`TipoInmueble` (`idTipo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,

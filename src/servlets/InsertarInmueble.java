@@ -138,8 +138,6 @@ public class InsertarInmueble extends HttpServlet {
             errores.put("vendeAlquila", e.getMessage());
         }
 
-        List<String> nombreImagenes = getImagesPartsAndWriteThem(request.getParts());
-
         int idPais = 0;
         try {
             idPais = comprobarParamteroIdPais(request.getParameter("pais"));
@@ -195,6 +193,7 @@ public class InsertarInmueble extends HttpServlet {
             errores.put("descripcion", e.getMessage());
         }
         if (errores.isEmpty()) {
+            List<String> nombreImagenes = getImagesPartsAndWriteThem(request.getParts());
             InmuebleVO inmuebleVO = new InmuebleVO();
             inmuebleVO.setPrecio(precio);
             inmuebleVO.setSuperficie(superficie);

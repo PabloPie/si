@@ -45,4 +45,22 @@ public class ExtrasDAO {
         }
         return listaExtras;
     }
+
+    public static List<ExtrasVO> getExtrasDeUnInmuelbe(int idInm, Connection connection) {
+        List<ExtrasVO> listaExtras = new ArrayList<>();
+        String query = "SELECT idExtras, nombre FROM extras NATURAL JOIN inmueble_has_extras WHERE idInmueble = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, idInm);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idExtra = rs.getInt(1);
+                String nombreExtra = rs.getString(2);
+                listaExtras.add(new ExtrasVO(idExtra, nombreExtra));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaExtras;
+    }
 }

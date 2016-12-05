@@ -39,11 +39,11 @@
 		</header>
 
 		<!-- Signup Form -->
-		<form id="signup-form" method="post" action="#">
+		<form id="signup-form" method="post" action="http://localhost:8080/resultadoBusqueda.jsp">
 			<fieldset>
 				<legend style="color:white">Me interesa:</legend>
-				<input type="radio" name="Selector" id="idComprar"/><label for="idComprar">Comprar</label>
-				<input type="radio" name="Selector" id="idAlquilar"/><label for="idAlquilar">Alquilar</label>
+				<input type="radio" name="Selector" id="idComprar" value="seVenden"/><label for="idComprar">Comprar</label>
+				<input type="radio" name="Selector" id="idAlquilar" value="seAlquilan"/><label for="idAlquilar">Alquilar</label>
 			</fieldset>
 				<input type="text" name="Buscar" placeholder="Ciudad, calle, municipio..." />
 				<input type="submit" value="&#xf002;" />
