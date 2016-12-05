@@ -44,7 +44,7 @@ public class ProvinciaDAO {
         PaisVO paisVO = null;
 	try {
 	    /* Create "preparedStatement". */
-	    String queryString = "SELECT idpais,nombreprov FROM pais WHERE idprovincia = ?";
+	    String queryString = "SELECT idpais,nombreprov FROM provincia WHERE idprovincia = ?";
 	    PreparedStatement preparedStatement = connection.prepareStatement(queryString);
 
 	    /* Fill "preparedStatement". */

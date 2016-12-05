@@ -4,6 +4,10 @@ public class TipoInmuebleVO {
     private int idTipo;
     private String nombreTipo;
 
+    public TipoInmuebleVO() {
+
+    }
+
     public TipoInmuebleVO(int idTipo, String nombreTipo) {
         this.idTipo = idTipo;
         this.nombreTipo = nombreTipo;

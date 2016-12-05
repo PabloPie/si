@@ -6,6 +6,10 @@ public class LocalizacionVO {
     private TiposDeViaVO tipoVia;
     private ProvinciaVO provincia;
 
+    public LocalizacionVO() {
+
+    }
+
     public LocalizacionVO(int numeroDir, int codigoPostal, String poblacion,
             String nombreDir, TiposDeViaVO tipoVia, ProvinciaVO provincia) {
         this.numeroDir = numeroDir;

@@ -15,8 +15,8 @@ public class InmuebleVO {
     private String descripcion;
     private boolean seVende;
     private boolean seAlquila;
-    private TipoInmuebleVO idTipoInmueble;
-    private UsuarioRegistradoVO idUsuario;
+    private TipoInmuebleVO tipoInmueble;
+    private UsuarioRegistradoVO usuario;
     private LocalizacionVO localizacion;
     private List<ExtrasVO> extras;
     private List<ImagenVO> imagenes;
@@ -27,8 +27,8 @@ public class InmuebleVO {
 
     public InmuebleVO(int idInmueble, double precio, int superficie,
                       int planta, int numHabitaciones, int numBagnos, String descripcion,
-                      boolean seVende, boolean seAlquila, TipoInmuebleVO idTipoInmueble,
-                      UsuarioRegistradoVO idUsuario, LocalizacionVO localizacion, 
+                      boolean seVende, boolean seAlquila, TipoInmuebleVO tipoInmueble,
+                      UsuarioRegistradoVO usuario, LocalizacionVO localizacion,
                       List<ExtrasVO> extras, List<ImagenVO> imagenes) {
         this.idInmueble = idInmueble;
         this.precio = precio;
@@ -39,8 +39,8 @@ public class InmuebleVO {
         this.descripcion = descripcion;
         this.seVende = seVende;
         this.seAlquila = seAlquila;
-        this.idTipoInmueble = idTipoInmueble;
-        this.idUsuario = idUsuario;
+        this.tipoInmueble = tipoInmueble;
+        this.usuario = usuario;
         this.localizacion = localizacion;
         this.extras = extras;
         this.imagenes = imagenes;
@@ -118,20 +118,20 @@ public class InmuebleVO {
         this.seAlquila = seAlquila;
     }
 
-    public TipoInmuebleVO getIdTipoInmueble() {
-        return idTipoInmueble;
+    public TipoInmuebleVO getTipoInmueble() {
+        return tipoInmueble;
     }
 
-    public void setIdTipoInmueble(TipoInmuebleVO idTipoInmueble) {
-        this.idTipoInmueble = idTipoInmueble;
+    public void setTipoInmueble(TipoInmuebleVO tipoInmueble) {
+        this.tipoInmueble = tipoInmueble;
     }
 
-    public UsuarioRegistradoVO getIdUsuario() {
-        return idUsuario;
+    public UsuarioRegistradoVO getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(UsuarioRegistradoVO idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(UsuarioRegistradoVO usuario) {
+        this.usuario = usuario;
     }
 
     public LocalizacionVO getLocalizacion() {
@@ -146,8 +146,8 @@ public class InmuebleVO {
         return extras;
     }
 
-    public void setExtras(List<ExtrasVO> extras) { 
-        this.extras = extras; 
+    public void setExtras(List<ExtrasVO> extras) {
+        this.extras = extras;
     }
 
     public List<ImagenVO> getImagenes() {
@@ -155,7 +155,7 @@ public class InmuebleVO {
     }
 
     public void setImagenes(List<ImagenVO> imagenes) {
-        this.imagenes = imagenes; 
+        this.imagenes = imagenes;
     }
 
 }

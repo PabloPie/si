@@ -5,6 +5,10 @@ public class ProvinciaVO {
     private String nombreProvincia;
     private PaisVO pais;
 
+    public ProvinciaVO() {
+
+    }
+
     public ProvinciaVO(int idProvincia, String nombreProvincia, PaisVO pais) {
         this.idProvincia = idProvincia;
         this.nombreProvincia = nombreProvincia;

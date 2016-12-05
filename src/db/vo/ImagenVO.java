@@ -5,6 +5,10 @@ public class ImagenVO {
     private int idImagen;
     private String ruta;
 
+    public ImagenVO() {
+
+    }
+
     public ImagenVO(int idInmueble, int idImagen, String ruta) {
         this.idInmueble = idInmueble;
         this.idImagen = idImagen;

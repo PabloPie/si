@@ -72,7 +72,7 @@
 				<div class="informacion">
 					<ul class="centrar-v">
 						<li><span class="titulos">Precio:</span><p> <%=inmueble.getPrecio()%></p></li>
-						<li><span class="titulos">Tipo de inmueble:</span><p><%=inmueble.getIdTipoInmueble().getNombreTipo()%></p></li>
+						<li><span class="titulos">Tipo de inmueble:</span><p><%=inmueble.getTipoInmueble().getNombreTipo()%></p></li>
 						<li><span class="titulos">Planta:</span><p><%=inmueble.getPlanta()%></p></li>
 						<li><span class="titulos">Metros cuadrados:</span><p> <%=inmueble.getSuperficie()%><sup>2</sup></p></li>
 						<li><span class="titulos">Número de habitaciones:</span><p><%=inmueble.getNumHabitaciones()%></p></li>

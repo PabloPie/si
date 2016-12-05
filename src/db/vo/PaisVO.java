@@ -4,6 +4,10 @@ public class PaisVO {
     private int idPais = 0;
     private String nombrePais;
 
+    public PaisVO() {
+
+    }
+
     public PaisVO(int idPais, String nombrePais) {
         this.idPais = idPais;
         this.nombrePais = nombrePais;

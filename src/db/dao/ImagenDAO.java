@@ -12,12 +12,11 @@ import db.vo.ImagenVO;
 public class ImagenDAO {
 
     public static List<ImagenVO> getImagenes(int idInmueble,
-            Connection connection) {
+                                             Connection connection) {
         List<ImagenVO> listaImagenes = new ArrayList<ImagenVO>();
         String query = "SELECT idInmueble, idImagen, ruta  FROM imagen WHERE idInmueble = ?";
         try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, idInmueble);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -31,5 +30,20 @@ public class ImagenDAO {
         }
 
         return listaImagenes;
+    }
+
+    public static void insertarImagenes(List<ImagenVO> listaImagenes, Connection connection) {
+        String query = "INSERT INTO imagen(idInmueble,ruta) VALUES(?,?)";
+        for (ImagenVO imagenVO : listaImagenes) {
+            PreparedStatement preparedStatement = null;
+            try {
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, imagenVO.getIdInmueble());
+                preparedStatement.setString(2, imagenVO.getRuta());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

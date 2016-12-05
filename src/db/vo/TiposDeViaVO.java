@@ -4,6 +4,10 @@ public class TiposDeViaVO {
     private int idVia = 0;
     private String nombreTipo;
 
+    public TiposDeViaVO() {
+
+    }
+
     public TiposDeViaVO(int idVia, String nombreTipo) {
         this.idVia = idVia;
         this.nombreTipo = nombreTipo;

@@ -6,7 +6,6 @@
          version="3.0">
     <description>Marketplace de inmuebles</description>
     <display-name>Jaus</display-name>
-
     <servlet>
         <servlet-name>InsertarInmueble</servlet-name>
         <servlet-class>servlets.InsertarInmueble</servlet-class>

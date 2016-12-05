@@ -1,0 +1,12 @@
+SET FOREIGN_KEY_CHECKS=0;
+drop table pais;
+drop table provincia;
+drop table localizacion;
+drop table TipoInmueble;
+drop table extras;
+drop table imagen;
+drop table inmueble;
+drop table inmueble_has_extras;
+drop table usuario_registrado;
+drop table tipos_de_via;
+set FOREIGN_KEY_CHECKS=1;

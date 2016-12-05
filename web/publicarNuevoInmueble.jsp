@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="db.vo.*,db.dao.*,java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -57,7 +56,7 @@
             <div class="page-header">
                 <h1>Publicar nuevo anuncio</h1>
             </div>
-            <form class="form-horizontal" action="http://localhost:8080/jaus/insertarInmueble.do"
+            <form class="form-horizontal" action="http://localhost:8080/insertarInmueble.do"
                   enctype="multipart/form-data" method="post">
                 <fieldset>
                     <legend>Informacion del piso</legend>
@@ -83,10 +82,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="num-bagnos">Numero de baños:</label>
+                        <label class="col-md-4 control-label" for="num-bagnos">Numero de baÃ±os:</label>
                         <div class="col-md-5">
                             <input name="num-bagnos" id="num-bagnos" type="number" class="form-control"
-                                   placeholder="Numero de baños">
+                                   placeholder="Numero de baÃ±os">
                         </div>
                     </div>
                     <div class="form-group">
@@ -102,7 +101,8 @@
                                 <% List<TipoInmuebleVO> tiposDeInmueble = TipoInmuebleDAO.
                                         getAllTipoInmueble(GestorDeConexionesBD.getConnection());
                                     for (TipoInmuebleVO t : tiposDeInmueble) {
-                                        out.println("<option " + "value=\"" + t.getNombreTipo() + "\">" + t.getNombreTipo() + "</option>");
+                                        out.println("<option " + "value=\"" + t.getIdTipo() + "\">" + t.getNombreTipo() +
+                                                "</option>");
                                     }%>
                             </select>
                         </div>
@@ -131,7 +131,8 @@
                                     <% List<PaisVO> paises = PaisDAO.
                                             obtenerTodoLosPaises(GestorDeConexionesBD.getConnection());
                                         for (PaisVO pais : paises) {
-                                            out.println("<option " + "value=\"" + pais.getNombrePais() + "\">" + pais.getNombrePais() + "</option>");
+                                            out.println("<option " + "value=\"" + pais.getIdPais() + "\">" +
+                                                    pais.getNombrePais() + "</option>");
                                         }%>
                                 </select>
                             </div>
@@ -143,7 +144,8 @@
                                     <% List<ProvinciaVO> provincias = ProvinciaDAO.
                                             obtenerTodasLasProvincias(GestorDeConexionesBD.getConnection());
                                         for (ProvinciaVO t : provincias) {
-                                            out.println("<option " + "value=\"" + t.getNombreProvincia() + "\">" + t.getNombreProvincia() + "</option>");
+                                            out.println("<option " + "value=\"" + t.getIdProvincia() + "\">" +
+                                                    t.getNombreProvincia() + "</option>");
                                         }%>
                                 </select>
                             </div>
@@ -156,13 +158,21 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-4 control-label" for="codigoPostal">Codigo postal:</label>
+                            <div class="col-md-5">
+                                <input name="codigoPostal" class="form-control" type="number" id="codigoPostal"
+                                       placeholder="Codigo postal">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-4 control-label" for="tipo-via">Tipo de via:</label>
                             <div class="col-md-5">
                                 <select name="tipo-via" class="form-control" id="tipo-via">
                                     <% List<TiposDeViaVO> tiposDeVia = TiposDeViaDAO.
                                             obtenerTodosTiposDeVia(GestorDeConexionesBD.getConnection());
                                         for (TiposDeViaVO t : tiposDeVia) {
-                                            out.println("<option " + "value=\"" + t.getNombreTipo() + "\">" + t.getNombreTipo() + "</option>");
+                                            out.println("<option " + "value=\"" + t.getIdVia() + "\">" +
+                                                    t.getNombreTipo() + "</option>");
                                         }%>
                                 </select>
                             </div>
@@ -188,7 +198,8 @@
                             <% List<ExtrasVO> extras = ExtrasDAO.
                                     getAllExtras(GestorDeConexionesBD.getConnection());
                                 for (ExtrasVO e : extras) {
-                                    out.println("<label class=\"checkbox-inline\"><input name=\"extras\" type=\"checkbox\" value=\"" + e.getNombre() + "\">" + e.getNombre() + "</label>");
+                                    out.println("<label class=\"checkbox-inline\"><input name=\"extras\" " +
+                                            "type=\"checkbox\" value=\"" + e.getIdExtra() + "\">" + e.getNombre() + "</label>");
                                 }%>
                         </div>
                     </fieldset>

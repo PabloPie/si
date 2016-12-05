@@ -11,20 +11,16 @@ import db.vo.TiposDeViaVO;
 
 public class LocalizacionDAO {
 
-    public static void insertLocalizacion(LocalizacionVO localizacion,
-            Connection connection) {
+    public static void insertLocalizacion(LocalizacionVO localizacion, Connection connection) {
         try {
             /* Create "preparedStatement". */
-            String query = "INSERT INTO localizacion(idpais,idprovincia,poblacion,"
-                    + "nombredir,numerodir,codigopostal,idvia) VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement(query);
+            String query = "INSERT INTO localizacion(idpais,idprovincia,poblacion, nombredir,numerodir,codigopostal," +
+                    "idvia) VALUES (?,?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             /* Fill "preparedStatement". */
-            preparedStatement.setInt(1,
-                    localizacion.getProvincia().getPais().getIdPais());
-            preparedStatement.setInt(2,
-                    localizacion.getProvincia().getIdProvincia());
+            preparedStatement.setInt(1, localizacion.getProvincia().getPais().getIdPais());
+            preparedStatement.setInt(2, localizacion.getProvincia().getIdProvincia());
             preparedStatement.setString(3, localizacion.getPoblacion());
             preparedStatement.setString(4, localizacion.getNombreDir());
             preparedStatement.setInt(5, localizacion.getNumeroDir());
@@ -47,18 +43,16 @@ public class LocalizacionDAO {
      * 
      * }
      */
-    public static LocalizacionVO obtenerLocalizacion(int idPais,
-            int idProvincia, String poblacion, String nombreDir, int numeroDir,
-            int idVia, Connection connection) {
+    public static LocalizacionVO obtenerLocalizacion(int idPais, int idProvincia, String poblacion, String nombreDir,
+                                                     int numeroDir, int idVia, Connection connection) {
         LocalizacionVO localizacionVO = null;
         ProvinciaVO provinciaVO = null;
         TiposDeViaVO tiposDeViaVO = null;
         try {
             /* Create "preparedStatement". */
-            String queryString = "SELECT codigopostal FROM localizacion WHERE idpais = ?"
-                    + "AND idprovincia = ? AND poblacion = ? AND nombredir = ? AND numerodir = ? AND idvia = ?";
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement(queryString);
+            String queryString = "SELECT codigopostal FROM localizacion WHERE idpais = ? AND idprovincia = ? AND " +
+                    "poblacion = ? AND nombredir = ? AND numerodir = ? AND idvia = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString);
 
             /* Fill "preparedStatement". */
             preparedStatement.setInt(1, idPais);
@@ -82,12 +76,11 @@ public class LocalizacionDAO {
             tiposDeViaVO = TiposDeViaDAO.obtenerTiposDeVia(idVia, connection);
 
             // Llamada para obtener el objeto ProvinciaVO
-            provinciaVO = ProvinciaDAO.obtenerProvincia(idProvincia,
-                    connection);
+            provinciaVO = ProvinciaDAO.obtenerProvincia(idProvincia, connection);
 
             // Creamos el objeto a devolver
-            localizacionVO = new LocalizacionVO(numeroDir, codigoPostal,
-                    poblacion, nombreDir, tiposDeViaVO, provinciaVO);
+            localizacionVO = new LocalizacionVO(numeroDir, codigoPostal, poblacion, nombreDir, tiposDeViaVO,
+                    provinciaVO);
 
         } catch (Exception e) {
             e.printStackTrace(System.err);
