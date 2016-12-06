@@ -123,15 +123,23 @@
                     List<InmuebleVO> inmuebleVOList = InmuebleDAO.getInmuebles(seAlquilan, seVenden, palabraBusqueda,
                             -1, -1, -1, -1, GestorDeConexionesBD.getConnection());
                     for (InmuebleVO inmuebleVO : inmuebleVOList) {
+                        out.println("<form method=\"post\" action=\"http://localhost:8080/infoInmueble.jsp\">");
+                        out.println("<input id=\"idInmueble\" type=\"hidden\" name=\"idInmueble\" value=\""
+                                + inmuebleVO.getIdInmueble() + "\">");
                         out.println("<div class=\"col-md-4 col-sm-4\">");
-                        out.println("<div class=\"caja-piso thumbnail\">");
-                        out.println("<img class=\"img-responsive\" src=\"http://localhost:8080/imgs/" +
-                                inmuebleVO.getImagenes().get(0).getRuta() + "\" alt=\"placeholder\" width=\"225\" height=\"300\"/>");
+                        out.println("<button type=\"submit\" class=\"caja-piso thumbnail\">");
+                        out.println("<img class=\"img-responsive\" src=\"" + inmuebleVO.getImagenes().get(0).getRuta()
+                                + "\" alt=\"placeholder\" width=\"225\" height=\"300\"/>");
                         out.println("<div class=\"caption\">");
-                        out.println("<h3> Piso X </h3>");
-                        out.println("<p>Piso en el centro de la ciudad</p>");
+                        out.println("<p>" + inmuebleVO.getPrecio() + " €<p>");
+                        out.println("<p>" + inmuebleVO.getNumHabitaciones() + " habitaciones</p>");
+                        out.println("<p>" + inmuebleVO.getSuperficie() + " m<sup>2</sup></p>");
+                        out.println("<p>" + inmuebleVO.getLocalizacion().getTipoVia().getNombreTipo() + " "
+                                + inmuebleVO.getLocalizacion().getNombreDir() + "</p>");
+                        out.println("<p>" + inmuebleVO.getLocalizacion().getPoblacion() + "</p>");
+                        out.println("</button>");
                         out.println("</div>");
-                        out.println("</div>");
+                        out.println("</form>");
                     }
                 %>
             </div>

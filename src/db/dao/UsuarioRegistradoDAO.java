@@ -87,7 +87,7 @@ public class UsuarioRegistradoDAO {
             String queryString = "UPDATE usuario_registrado "
                     + "SET nombre = ?, apellidos = ?, email = ?, telefono = ?, "
                     + " contraseña = ?, fecha = ?, idpais = ?, idprovincia = ?, poblacion = ?, nombredir = ?,"
-                    + "numerodir = ?, idvia = ? WHERE  idusuario = ?)";
+                    + "numerodir = ?, idvia = ? WHERE  idusuario = ?";
             PreparedStatement preparedStatement = connection
                     .prepareStatement(queryString);
 

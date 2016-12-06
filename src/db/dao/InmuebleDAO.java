@@ -80,11 +80,7 @@ public class InmuebleDAO {
                 String nombreDir = resultSet.getString(Tablas.Inmueble.NOMBRE_DIR);
                 int numeroDir = resultSet.getInt(Tablas.Inmueble.NUMERO_DIR);
                 int idVia = resultSet.getInt(Tablas.Inmueble.ID_VIA);
-                List<InmuebleHasExtrasVO> inmExtras = InmuebleHasExtrasDAO.getExtrasInmueble(idInm, connection);
-                List<ExtrasVO> extras = new ArrayList<>();
-                for (InmuebleHasExtrasVO e : inmExtras) {
-                    extras.add(ExtrasDAO.getExtras(e.getIdExtras(), connection));
-                }
+                List<ExtrasVO> extras = ExtrasDAO.getExtrasDeUnInmuelbe(idInmueble, connection);
                 TipoInmuebleVO tipoInmuebleVO = TipoInmuebleDAO.getTipoInmuebleById(idTipoInmueble, connection);
                 UsuarioRegistradoVO usuarioRegistradoVO = UsuarioRegistradoDAO.encontrarDatosUsuario(idUsuario,
                         connection);

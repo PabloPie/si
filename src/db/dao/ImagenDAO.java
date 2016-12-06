@@ -11,6 +11,8 @@ import db.vo.ImagenVO;
 
 public class ImagenDAO {
 
+    private static final String IMGS_PATH = "http://localhost:8080/imgs/";
+
     public static List<ImagenVO> getImagenes(int idInmueble,
                                              Connection connection) {
         List<ImagenVO> listaImagenes = new ArrayList<ImagenVO>();
@@ -23,7 +25,7 @@ public class ImagenDAO {
                 int idInm = resultSet.getInt(Tablas.Imagenes.ID_INMUEBLE);
                 int idImg = resultSet.getInt(Tablas.Imagenes.ID_IMAGEN);
                 String ruta = resultSet.getString(Tablas.Imagenes.RUTA);
-                listaImagenes.add(new ImagenVO(idInm, idImg, ruta));
+                listaImagenes.add(new ImagenVO(idInm, idImg, IMGS_PATH + ruta));
             }
         } catch (SQLException e) {
             e.printStackTrace();
