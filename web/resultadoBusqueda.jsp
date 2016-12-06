@@ -67,7 +67,9 @@
         <div class="col-md-3 col-sm-12">
             <div class="row">
                 <div class="col-md-12 col-sm-12 sidebar opciones-filtrado">
-                    <form class="nav nav-sidebar">
+                    <form class="nav nav-sidebar" method="post" action="http://localhost:8080/resultadoBusqueda.jsp">
+                        <input type="hidden" name="Buscar" value="<%=request.getParameter("Buscar")%>">
+                        <input type="hidden" name="Selector" value="<%=request.getParameter("Selector")%>">
                         <fieldset>
                             <legend>Opciones de filtro</legend>
                             <fieldset>
@@ -75,13 +77,15 @@
                                 <label for="dinero-desde">Desde: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">&#8364</span> <input
-                                        id="dinero-desde" type="text" class="form-control"
+                                        id="dinero-desde" type="text" class="form-control" name="dinero-desde"
+                                        value="<%= request.getParameter("dinero-desde") != null ? request.getParameter("dinero-desde") : "" %>"
                                         placeholder="Desde"> <span class="input-group-addon">,00</span>
                                 </div>
                                 <label for="dinero-hasta">Hasta: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">&#8364</span> <input
-                                        id="dinero-hasta" type="text" class="form-control"
+                                        id="dinero-hasta" type="text" class="form-control" name="dinero-hasta"
+                                        value="<%= request.getParameter("dinero-hasta") != null ? request.getParameter("dinero-hasta") : "" %>"
                                         placeholder="Hasta"> <span class="input-group-addon">,00</span>
                                 </div>
                             </fieldset>
@@ -90,16 +94,21 @@
                                 <label for="sup-desde">Desde: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">m<sup>2</sup></span> <input
-                                        id="sup-desde" type="text" class="form-control"
+                                        id="sup-desde" type="text" class="form-control" name="sup-desde"
+                                        value="<%= request.getParameter("sup-desde") != null ? request.getParameter("sup-desde") : "" %>"
                                         placeholder="Desde"> <span class="input-group-addon">,00</span>
                                 </div>
                                 <label for="sup-hasta">Hasta: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">m<sup>2</sup></span> <input
-                                        id="sup-hasta" type="text" class="form-control"
+                                        id="sup-hasta" type="text" class="form-control" name="sup-hasta"
+                                        value="<%= request.getParameter("sup-hasta") != null ? request.getParameter("sup-hasta") : "" %>"
                                         placeholder="Hasta"> <span class="input-group-addon">,00</span>
                                 </div>
                             </fieldset>
+                            <div class="center">
+                                <button class="btn col-md-12 btn-md btn-default" type="submit">Filtrar</button>
+                            </div>
                         </fieldset>
                     </form>
                 </div>
@@ -119,9 +128,29 @@
                             seAlquilan = true;
                         }
                     }
+                    String dineroDesde = request.getParameter("dinero-desde");
+                    String dineroHasta = request.getParameter("dinero-hasta");
+                    String supDesde = request.getParameter("sup-desde");
+                    String supHasta = request.getParameter("sup-hasta");
+                    int dDesde = -1;
+                    int dHasta = -1;
+                    int sDesde = -1;
+                    int sHasta = -1;
+                    if (dineroDesde != null && !dineroDesde.isEmpty()) {
+                        dDesde = Integer.parseInt(dineroDesde);
+                    }
+                    if (dineroHasta != null && !dineroHasta.isEmpty()) {
+                        dHasta = Integer.parseInt(dineroHasta);
+                    }
+                    if (supDesde != null && !supDesde.isEmpty()) {
+                        sDesde = Integer.parseInt(supDesde);
+                    }
+                    if (supHasta != null && !supHasta.isEmpty()) {
+                        sHasta = Integer.parseInt(supHasta);
+                    }
                     String palabraBusqueda = request.getParameter("Buscar");
                     List<InmuebleVO> inmuebleVOList = InmuebleDAO.getInmuebles(seAlquilan, seVenden, palabraBusqueda,
-                            -1, -1, -1, -1, GestorDeConexionesBD.getConnection());
+                            dDesde, dHasta, sDesde, sHasta, GestorDeConexionesBD.getConnection());
                     for (InmuebleVO inmuebleVO : inmuebleVOList) {
                         out.println("<form method=\"post\" action=\"http://localhost:8080/infoInmueble.jsp\">");
                         out.println("<input id=\"idInmueble\" type=\"hidden\" name=\"idInmueble\" value=\""
