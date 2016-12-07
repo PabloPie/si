@@ -2,6 +2,8 @@
 <%@ page import="db.dao.InmuebleDAO" %>
 <%@ page import="db.vo.InmuebleVO" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="db.vo.ImagenVO" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
 <html lang="es">
@@ -115,22 +117,14 @@
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img class="centrar-v img-responsive"
-                             src="assets/images/pic01.jpg">
-                    </div>
-                    <div class="item">
-                        <img class="centrar-v img-responsive"
-                             src="assets/images/pic02.jpg">
-                    </div>
-                    <div class="centrar-v item">
-                        <img class="centrar-v img-responsive"
-                             src="assets/images/pic03.jpg">
-                    </div>
-                    <div class="centrar-v item">
-                        <img class="centrar-v img-responsive"
-                             src="assets/images/pic04.jpg">
-                    </div>
+                    <%
+                            for(int i=0; i<inmueble.getImagenes().size() -1; i++){
+                            out.println("<div class=\"item active\">");
+                            out.println("<img class=\"centrar-v img-responsive\"");
+                            out.println("src=\"" + inmueble.getImagenes().get(i).getRuta() + "\">");
+                            out.println("</div>");
+                        }
+                    %>
                 </div>
 
                 <!-- Left and right controls -->
