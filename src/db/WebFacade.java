@@ -8,6 +8,25 @@ import sun.java2d.UnixSurfaceManagerFactory;
 
 public class WebFacade {
 
+	public static boolean existeUsuario(String usuario){
+        Connection connection = null;
+        boolean encontrado = false;
+        System.out.println("Inicio comprobacion existe usuario...");
+        try{
+            connection = GestorDeConexionesBD.getConnection();
+            encontrado = UsuarioRegistradoDAO.existeUsuario(usuario,connection);
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally{
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return encontrado;
+    }
 
 	public static boolean comprobarUsuario(String usuario, String password){
         Connection connection = null;
@@ -29,22 +48,25 @@ public class WebFacade {
     return encontrado;
     }
 
-	public void crearCliente(UsuarioRegistradoVO usuario)throws SQLException {    
+	public static void crearUsuario(UsuarioRegistradoVO usuario) {
 		Connection connection = null;
 		System.out.println("Inicio creación de usuario...");		
 	    try{
 		   connection = GestorDeConexionesBD.getConnection();
-	       UsuarioRegistradoDAO usuarioDAO = new UsuarioRegistradoDAO();
 		   UsuarioRegistradoDAO.insertarUsuario(usuario,connection);  
 	       connection.close();  
 	    } catch (Exception e) {
 	       e.printStackTrace(System.err);
 	    } finally{
-			connection.close();
-		}                
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 
-	public void crearPais(PaisVO pais) throws SQLException{
+	public static void crearPais(PaisVO pais) throws SQLException{
 		Connection connection = null;
 		System.out.println("Inicio creación de pais...");
 		try{

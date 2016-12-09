@@ -80,6 +80,22 @@ public class UsuarioRegistradoDAO {
         return encontrado;
     }
 
+    public static boolean existeUsuario(String usuario, Connection connection){
+        boolean encontrado=false;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("Select idusuario from usuario_registrado where idusuario=?");
+            preparedStatement.setString(1, usuario);
+            ResultSet res = preparedStatement.executeQuery();
+            if(res.next()){
+                encontrado = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return encontrado;
+    }
+
+
     public static void actualizarUsuario(UsuarioRegistradoVO usuario,
             Connection connection) {
         try {
