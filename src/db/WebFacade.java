@@ -4,10 +4,30 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import db.dao.*;
 import db.vo.*;
+import sun.java2d.UnixSurfaceManagerFactory;
 
 public class WebFacade {
 
 
+	public static boolean comprobarUsuario(String usuario, String password){
+        Connection connection = null;
+        boolean encontrado = false;
+        System.out.println("Inicio comprobacion usuario...");
+        try{
+            connection = GestorDeConexionesBD.getConnection();
+            encontrado = UsuarioRegistradoDAO.validarUsuario(usuario,password,connection);
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally{
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    return encontrado;
+    }
 
 	public void crearCliente(UsuarioRegistradoVO usuario)throws SQLException {    
 		Connection connection = null;
@@ -38,17 +58,5 @@ public class WebFacade {
 		}
 	}
 
-	public static void main (String[] args) {
-	   	WebFacade fachada = new WebFacade();
-		//UsuarioRegistradoVO usuario = new UsuarioRegistradoVO("Elblopo","Caca","Futi","qwerty",976000000,"emilio@emilio",LocalDate.now(),null);
-		PaisVO pais = new PaisVO(1,"España");
-
-		try{
-			//fachada.crearClienteo(usuario);
-			fachada.crearPais(pais);
-	    }catch (Exception e){
-			e.printStackTrace(System.err);
-		}
-	}
 }
 

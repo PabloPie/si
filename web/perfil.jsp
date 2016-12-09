@@ -33,9 +33,11 @@
 
   <body>
   <%
+
     String usuario = request.getParameter("usuario");
+    UsuarioRegistradoVO user=null;
       try{
-          UsuarioRegistradoVO user = UsuarioRegistradoDAO.encontrarDatosUsuario(usuario, GestorDeConexionesBD.getConnection());
+          user = UsuarioRegistradoDAO.encontrarDatosUsuario(usuario, GestorDeConexionesBD.getConnection());
       }catch(SQLException e){
           e.printStackTrace();
   }
@@ -73,49 +75,50 @@
       <form class="form-horizontal" role="form">
         <fieldset>
 
-          <!-- Form Name -->
+          <!-- Info personal -->
           <legend>Información Personal</legend>
 
-          <!-- Text input-->
+          <!-- Nombre-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="idnombre">Nombre</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="Pepito" value="<%=user.getNombre();%>" id="idnombre" class="form-control">
+              <input type="text" placeholder="Pepito" value="<%=user.getNombre()%>" id="idnombre" class="form-control">
             </div>
           </div>
 
-          <!-- Text input-->
+          <!-- Apellidos-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="idapellidos">Apellidos</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="García García" value="<%=user.getApellidos();%>" id="idapellidos" class="form-control">
+              <input type="text" placeholder="García García" value="<%=user.getApellidos()%>" id="idapellidos" class="form-control">
             </div>
           </div>
 
-          <!-- Text input-->
+          <!-- Correo-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="idemail">Email</label>
             <div class="col-sm-10">
-              <input type="email" value="<%=user.getEmail();%>"  placeholder="pepito@correopepito.com" id="idemail" class="form-control">
+              <input type="email" value="<%=user.getEmail()%>"  placeholder="pepito@correopepito.com" id="idemail" class="form-control">
             </div>
           </div>
 
-          <!-- Text input-->
+          <!-- Fecha de nacimiento-->
           <div class="form-group">
     		<label class="control-label col-sm-2" for="input-date">Fecha de Nacimiento</label>
     		<div class="col-sm-10">
-    			<input type="date" id="input-date" class="form-control">
+    			<input type="date" value="<%=user.getFecha().toString()%>" id="input-date" class="form-control">
       		</div>
   		  </div>
-    	  
+
+            <!-- Telefono-->
   		   <div class="form-group">
             <label class="col-sm-2 control-label" for="Telefono">Teléfono</label>
             <div class="col-sm-10">
-              <input type="tel" placeholder="XXX XX XX XX" id="Telefono" class="form-control">
+              <input type="tel" value="<%=user.getTelefono()%>" placeholder="XXX XX XX XX" id="Telefono" class="form-control">
             </div>
           </div>
 
-          <!-- Text input-->
+          <!-- Contraseña-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="Password">Contraseña</label>
             <div class="col-sm-10">
@@ -123,6 +126,7 @@
             </div>
           </div>
 
+            <!-- Confirmar contraseña-->
            <div class="form-group">
             <label class="col-sm-2 control-label" for="REPassword">Repetir Contraseña</label>
             <div class="col-sm-10">
@@ -130,18 +134,19 @@
             </div>
           </div>
           
-          <!-- Form Name -->
+          <!-- Direccion -->
           <legend>Dirección</legend>
 
-          <!-- Text input-->
+          <!-- Dir 1-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="linea1">Linea 1</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="Dirección Linea 1" id="linea1" class="form-control">
+              <input type="text" value="<%=user.getLocation().getTipoVia().getNombreTipo()+" "+
+              user.getLocation().getNombreDir()+", "+user.getLocation().getNumeroDir()%>" placeholder="Dirección Linea 1" id="linea1" class="form-control">
             </div>
           </div>
 
-          <!-- Text input-->
+          <!-- Dir 2-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="linea2">Linea 2</label>
             <div class="col-sm-10">
@@ -149,36 +154,38 @@
             </div>
           </div>
 
-          <!-- Text input-->
+          <!-- Ciudad-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="ciudad">Ciudad</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="Ciudad" id="ciudad"class="form-control">
+              <input type="text" value="<%=user.getLocation().getPoblacion()%>" placeholder="Ciudad" id="ciudad"class="form-control">
             </div>
           </div>
 
-          <!-- Text input-->
+          <!-- Provincia-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="prov">Provincia</label>
             <div class="col-sm-4">
-              <input type="text" placeholder="Provincia" id="prov" class="form-control">
+              <input type="text" value="<%=user.getLocation().getProvincia().getNombreProvincia()%>" placeholder="Provincia" id="prov" class="form-control">
             </div>
 
+              <!-- CP-->
             <label class="col-sm-2 control-label" for="codpost">CP</label>
             <div class="col-sm-4">
-              <input type="text" placeholder="Código Postal" id="codpost" class="form-control">
+              <input type="text" value="<%=user.getLocation().getCodigoPostal()%>" placeholder="Código Postal" id="codpost" class="form-control">
             </div>
           </div>
 
 
-          <!-- Text input-->
+          <!-- Pais-->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="pais">País</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="País" id="pais"class="form-control">
+              <input type="text" value="<%=user.getLocation().getProvincia().getPais().getNombrePais()%>" placeholder="País" id="pais"class="form-control">
             </div>
           </div>
 
+            <!-- Botones envio cancel-->
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <div class="pull-right">
