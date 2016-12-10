@@ -4,6 +4,7 @@ import db.WebFacade;
 import db.dao.UsuarioRegistradoDAO;
 import db.vo.UsuarioRegistradoVO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,16 +17,18 @@ public class Login extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-        //HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(true);
         String password = request.getParameter("password");
         String usuario = request.getParameter("user");
         if (WebFacade.comprobarUsuario(usuario,password)){
-            HttpSession session = request.getSession(true);
             session.setAttribute("currentSessionUser",usuario);
             response.sendRedirect("IndexLogged.jsp");
         }
         else {
-            response.sendRedirect("IndexError.jsp");
+            session.invalidate();
+            request.setAttribute("errorLogin", "Usuario o password inválido.");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ErrorLogin.jsp");
+            rd.forward(request, response);
         }
     }
 

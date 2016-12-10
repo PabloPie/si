@@ -31,7 +31,12 @@ public class UsuarioRegistradoDAO {
             preparedStatement.setString(1, usuario.getidusuario());
             preparedStatement.setString(2, usuario.getNombre());
             preparedStatement.setString(3, usuario.getApellidos());
-            Date date = Date.valueOf(usuario.getFecha());
+            Date date;
+            if(usuario.getFecha()!=null) {
+                date = Date.valueOf(usuario.getFecha());
+            }else{
+                date = null;
+            }
             preparedStatement.setDate(4, date);
             preparedStatement.setString(5, usuario.getClaveEncriptada());
             preparedStatement.setInt(6, usuario.getTelefono());
@@ -58,6 +63,8 @@ public class UsuarioRegistradoDAO {
 
             if (insertedRows != 1) {
                 throw new SQLException("Problemas insertando usuario.");
+            }else{
+                System.err.println("Insertado "+usuario.getidusuario()+" en usuario_registrado");
             }
         } catch (Exception e) {
             e.printStackTrace(System.err);

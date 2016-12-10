@@ -60,7 +60,7 @@
 						<h4 class="modal-title" id="myModalLabel">Formulario de Registro</h4>
 					</div>
 					<div class="modal-body">
-						<form action="http://miservidor:8080/..." method="POST">
+						<form action="http://localhost:8080/Registro.do" method="POST">
 							<label for="IDUsuarioR">Nombre de usuario:</label><input type="text" name="user" id="IDUsuarioR"/><br/>
 							<label for="IDNombre">Nombre:</label><input type="text" name="nombre" id="IDNombre"/><br/>
 							<label for="IDApellido">Apellido:</label><input type="text" name="apellido" id="IDApellido"/><br/>
@@ -72,26 +72,27 @@
 							<label for="IDREPass">Repite Contraseña:</label><input type="password" name="REPass" id="IDREPass"/><br/>
 
 							<p>Nota: todos los campos son obligatorios</p>
+							<div class="modal-footer">
+								<button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
+								<input type="submit" class="form-control acceptReg" >Registrarse</input>
+							</div>
 						</form>
 
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="acceptReg">Registrarse</button>
-					</div>
+
 				</div>
 			</div>
 		</div>
 
 		<!-- Modal iniciar sesion -->
-		<div class="modal fade"  id="myModalIS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade"  id="myModalIS" tabindex="-1" role="dialog" aria-labelledby="myModalISLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content" style="background-color:black">
 					<div class="modal-header">
 						<h4 class="modal-title" id="ModalIS">Iniciar sesión:</h4>
 					</div>
 					<div class="modal-body">
-						<form action="http://miservidor:8080/..." method="POST">
+						<form action="http://localhost:8080/Login.do" method="POST">
 							<label for="IDUsuario">Usuario</label><input type="text" name="user" id="IDUsuario"/><br/>
 							<label for="IDPassword">Contraseña</label><input type="text" name="password" id="IDPassword"/><br/>
 
@@ -100,7 +101,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="acceptReg">Entrar</button>
+						<button type="submit" class="acceptReg">Entrar</button>
 					</div>
 				</div>
 			</div>

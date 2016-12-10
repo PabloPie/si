@@ -15,6 +15,7 @@ public class WebFacade {
         try{
             connection = GestorDeConexionesBD.getConnection();
             encontrado = UsuarioRegistradoDAO.existeUsuario(usuario,connection);
+            System.err.println(encontrado);
             connection.close();
         } catch (Exception e) {
             e.printStackTrace(System.err);

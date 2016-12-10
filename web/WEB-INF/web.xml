@@ -7,6 +7,15 @@
     <description>Marketplace de inmuebles</description>
     <display-name>Jaus</display-name>
     <servlet>
+        <servlet-name>Registro</servlet-name>
+        <servlet-class>servlets.Registro</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Registro</servlet-name>
+        <url-pattern>/Registro.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>InsertarInmueble</servlet-name>
         <servlet-class>servlets.InsertarInmueble</servlet-class>
         <multipart-config>
@@ -18,4 +27,5 @@
         <servlet-name>InsertarInmueble</servlet-name>
         <url-pattern>/insertarInmueble.do</url-pattern>
     </servlet-mapping>
+
 </web-app>
