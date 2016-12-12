@@ -68,25 +68,13 @@
 							<label for="IDmail">E-mail:</label><input type="email" name="Mail" id="IDMail"/><br/>
 							<label for="IDREmail">Repite E-mail:</label><input type="email" name="REMail" id="IDREMail"/><br/>
 
-							<label for="IDPass">Contraseña:</label><input type="password" name="Pass" id="IDPass"/><br/>
-							<label for="IDREPass">Repite contraseña:</label><input type="password" name="REPass" id="IDREPass"/><br/>
-
-                            <!--<label for="idphone">Telefono:</label><input type="text" name="phone" id="idphone"/><br/>
-                            <label for="idfecha">Fecha</label><input type="date" name="fecha" id="idfecha"/><br/>
-
-                            <label for="idpais">Pais:</label><input type="text" name="pais" id="idpais"/><br/>
-                            <label for="idprovincia">Provincia:</label><input type="text" name="provincia" id="idprovincia"/><br/>
-
-                            <label for="idpoblacion">Población:</label><input type="text" name="poblacion" id="idpoblacion"/><br/>
-                            <label for="idnombredir">Dirección:</label><input type="text" name="nombredir" id="idnombredir"/><br/>
-
-                            <label for="idnumdir">Número:</label><input type="number" name="numdir" id="idnumdir"/><br/>
-                            <label for="idvia">Tipo de Via:</label><input type="text" name="tipovia" id="idvia"/><br/>-->
+							<label for="IDPass">contrasena:</label><input type="password" name="Pass" id="IDPass"/><br/>
+							<label for="IDREPass">Repite contrasena:</label><input type="password" name="REPass" id="IDREPass"/><br/>
 
 							<p>Nota: todos los campos son obligatorios</p>
 							<div class="modal-footer">
 								<button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
-								<input type="submit" class="form-control acceptReg" >
+								<input type="submit" class="form-control acceptReg" ></input>
 							</div>
 						</form>
 
@@ -105,12 +93,18 @@
 					</div>
 					<div class="modal-body">
 						<form action="http://localhost:8080/Login.do" method="POST">
+
 							<label for="IDUsuario">Usuario</label><input type="text" name="user" id="IDUsuario"/><br/>
 							<label for="IDPassword">Contraseña</label><input type="password" name="password" id="IDPassword"/><br/>
-                            <p></p>
+							<%
+								if(null!=request.getAttribute("errorLogin"))
+								{
+									out.println(request.getAttribute("errorLogin"));
+								}
+							%>
                             <div class="modal-footer">
                                 <button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
-                                <input type="submit" class="form-control acceptReg">
+                                <input type="submit" class="form-control acceptReg"></input>
                             </div>
 						</form>
 

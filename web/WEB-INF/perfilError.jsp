@@ -118,17 +118,17 @@
             </div>
           </div>
 
-          <!-- Contraseña-->
+          <!-- contrasena-->
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="Password">Contraseña</label>
+            <label class="col-sm-2 control-label" for="Password">contrasena</label>
             <div class="col-sm-10">
               <input type="password" placeholder="**********" id="Password" class="form-control">
             </div>
           </div>
 
-            <!-- Confirmar contraseña-->
+            <!-- Confirmar contrasena-->
            <div class="form-group">
-            <label class="col-sm-2 control-label" for="REPassword">Repetir Contraseña</label>
+            <label class="col-sm-2 control-label" for="REPassword">Repetir contrasena</label>
             <div class="col-sm-10">
               <input type="password" placeholder="**********" id="REPassword" class="form-control">
             </div>

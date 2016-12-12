@@ -53,7 +53,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 </form>-->
 
 <!-- Modal -->
-<div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="background-color:black">
             <div class="modal-header">
@@ -62,10 +62,12 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
             <div class="modal-body">
                 <form action="http://localhost:8080/Registro.do" method="POST">
                     <%
+                        if(null!=request.getAttribute("CampoVacio")){
+                            out.println(request.getAttribute("CampoVacio"));
+                        }
                         if(null!=request.getAttribute("usuarioExiste"))
                         {
-                            out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                            out.println("<span class=\"help-block\" >" + request.getAttribute("usuarioExiste") + "</span >");
+                            out.println(request.getAttribute("usuarioExiste"));
                         }
                     %>
                     <label for="IDUsuarioR">Nombre de usuario:</label><input type="text" name="user" id="IDUsuarioR"/><br/>
@@ -76,26 +78,24 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                     <%
                         if(null!=request.getAttribute("mismatchM"))
                         {
-                            out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                            out.println("<span class=\"help-block\" >" + request.getAttribute("mismatchM") + "</span >");
+                            out.println(request.getAttribute("mismatchM"));
                         }
                     %>
                     <label for="IDREmail">Repite E-mail:</label><input type="email" name="REMail" id="IDREMail"/><br/>
 
-                    <label for="IDPass">Contraseña:</label><input type="password" name="Pass" id="IDPass"/><br/>
+                    <label for="IDPass">contrasena:</label><input type="password" name="Pass" id="IDPass"/><br/>
                     <%
                         if(null!=request.getAttribute("mismatchP"))
                         {
-                            out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                            out.println("<span class=\"help-block\" >" + request.getAttribute("mismatchP") + "</span >");
+                            out.println(request.getAttribute("mismatchP"));
                         }
                     %>
-                    <label for="IDREPass">Repite Contraseña:</label><input type="password" name="REPass" id="IDREPass"/><br/>
+                    <label for="IDREPass">Repite contrasena:</label><input type="password" name="REPass" id="IDREPass"/><br/>
 
                     <p>Nota: todos los campos son obligatorios</p>
                     <div class="modal-footer">
                         <button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="form-control acceptReg" >Registrarse</input>
+                        <input type="submit" class="form-control acceptReg" ></input>
                     </div>
                 </form>
 
@@ -112,17 +112,17 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                 <h4 class="modal-title" id="ModalIS">Iniciar sesión:</h4>
             </div>
             <div class="modal-body">
-                <form action="http://miservidor:8080/..." method="POST">
+                <form action="http://localhost:8080/Login.do" method="POST">
                     <label for="IDUsuario">Usuario</label><input type="text" name="user" id="IDUsuario"/><br/>
-                    <label for="IDPassword">Contraseña</label><input type="text" name="password" id="IDPassword"/><br/>
-
+                    <label for="IDPassword">Contraseña</label><input type="password" name="password" id="IDPassword"/><br/>
+                    <div class="modal-footer">
+                        <button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
+                        <input type="button" class="form-control acceptReg"></input>
+                    </div>
                 </form>
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="cancelReg" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="acceptReg">Entrar</button>
-            </div>
+
         </div>
     </div>
 </div>

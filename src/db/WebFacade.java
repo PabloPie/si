@@ -7,6 +7,24 @@ import db.vo.*;
 import sun.java2d.UnixSurfaceManagerFactory;
 
 public class WebFacade {
+    public static void insertarLocalizacion(LocalizacionVO location){
+        Connection connection = null;
+        System.out.println("Inicio inserción localización...");
+        try{
+            connection = GestorDeConexionesBD.getConnection();
+            LocalizacionDAO.insertLocalizacion(location,connection);
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally{
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 	public static boolean existeUsuario(String usuario){
         Connection connection = null;

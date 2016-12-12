@@ -20,14 +20,14 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession(true);
         String password = request.getParameter("password");
         String usuario = request.getParameter("user");
-        if (WebFacade.comprobarUsuario(usuario,password)){
+        if (WebFacade.comprobarUsuario(usuario,password) && password!="" && usuario!=""){
             session.setAttribute("currentSessionUser",usuario);
-            response.sendRedirect("IndexLogged.jsp");
+            response.sendRedirect("perfil.jsp");
         }
         else {
             session.invalidate();
             request.setAttribute("errorLogin", "Usuario o password inválido.");
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ErrorLogin.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/loginError.jsp");
             rd.forward(request, response);
         }
     }

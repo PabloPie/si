@@ -24,6 +24,8 @@ public class Registro extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         UsuarioRegistradoVO userVO;
+        HashMap<String, String> errores = new HashMap<>();
+
         userVO = comprobarErrores(request);
         if (userVO!=null){
             WebFacade.crearUsuario(userVO);
@@ -43,31 +45,35 @@ public class Registro extends HttpServlet {
         String mail = request.getParameter("Mail");
         String remail = request.getParameter("REMail");
         String repassword = request.getParameter("REPass");
-        boolean errores = false;
-        System.out.println(password);
-        System.out.println(usuario);
-        System.out.println(nombre);
-        System.out.println(apellidos);
-        System.out.println(mail);
-        System.out.println(remail);
-        System.out.println(repassword);
+        //int telefono = Integer.parseInt(request.getParameter("phone"));
+        //String pais = request.getParameter("pais");
+        //String provincia = request.getParameter("provincia");
+        //String direccion = request.getParameter("nombredir");
+        //int numvia;
+        //String tipovia;
+
+
+        boolean err = false;
+
+        if(password.equals("") || usuario.equals("") || nombre.equals("") || apellidos.equals("") || mail.equals("") || remail.equals("") ||
+                repassword.equals("")){
+            request.setAttribute("CampoVacio", "ERROR: TODOS LOS CAMPOS DEBEN SER RELLENADOS");
+            err = true;
+        }
 
         if(!repassword.equals(password)){
-            System.err.println("Error contras.");
-            request.setAttribute("mismatchP", "Contraseña no coincide");
-            errores = true;
+            request.setAttribute("mismatchP", "contrasena no coincide");
+            err = true;
         }
         if(!mail.equals(remail)){
-            System.err.println("Error mails.");
             request.setAttribute("mismatchM", "Mail no coincide.");
-            errores = true;
+            err = true;
         }
         if(WebFacade.existeUsuario(usuario)){
             request.setAttribute("usuarioExiste", "Usuario ya existente.");
-            errores = true;
+            err = true;
         }
-        if(!errores){
-            System.err.println("Registra usuario");
+        if(!err){
             return new UsuarioRegistradoVO(usuario, nombre,
                     apellidos, password, 0,
                     mail, null, null);
