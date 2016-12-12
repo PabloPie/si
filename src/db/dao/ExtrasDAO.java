@@ -11,24 +11,6 @@ import db.vo.ExtrasVO;
 
 public class ExtrasDAO {
 
-    public static ExtrasVO getExtras(int idExtra, Connection connection) {
-        ExtrasVO extra = null;
-        String query = "SELECT nombre  FROM extras WHERE idExtras = ?;";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, idExtra);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.first();
-            int idExt = resultSet.getInt(Tablas.Extras.ID_EXTRAS);
-            String nombreExtra = resultSet.getString(Tablas.Extras.NOMBRE);
-            extra = new ExtrasVO(idExtra, nombreExtra);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return extra;
-    }
-
     public static List<ExtrasVO> getAllExtras(Connection connection) {
         List<ExtrasVO> listaExtras = new ArrayList<ExtrasVO>();
         String query = "SELECT idExtras,nombre FROM extras";

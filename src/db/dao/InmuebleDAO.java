@@ -6,8 +6,6 @@ import java.util.List;
 
 import db.vo.*;
 
-import javax.ejb.Local;
-
 public class InmuebleDAO {
 
     public static void insertarInmueble(InmuebleVO inmueble, Connection connection) {

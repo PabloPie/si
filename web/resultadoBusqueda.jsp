@@ -77,14 +77,14 @@
                                 <label for="dinero-desde">Desde: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">&#8364</span> <input
-                                        id="dinero-desde" type="text" class="form-control" name="dinero-desde"
+                                        id="dinero-desde" type="number" class="form-control" name="dinero-desde"
                                         value="<%= request.getParameter("dinero-desde") != null ? request.getParameter("dinero-desde") : "" %>"
                                         placeholder="Desde"> <span class="input-group-addon">,00</span>
                                 </div>
                                 <label for="dinero-hasta">Hasta: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">&#8364</span> <input
-                                        id="dinero-hasta" type="text" class="form-control" name="dinero-hasta"
+                                        id="dinero-hasta" type="number" class="form-control" name="dinero-hasta"
                                         value="<%= request.getParameter("dinero-hasta") != null ? request.getParameter("dinero-hasta") : "" %>"
                                         placeholder="Hasta"> <span class="input-group-addon">,00</span>
                                 </div>
@@ -94,14 +94,14 @@
                                 <label for="sup-desde">Desde: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">m<sup>2</sup></span> <input
-                                        id="sup-desde" type="text" class="form-control" name="sup-desde"
+                                        id="sup-desde" type="number" class="form-control" name="sup-desde"
                                         value="<%= request.getParameter("sup-desde") != null ? request.getParameter("sup-desde") : "" %>"
                                         placeholder="Desde"> <span class="input-group-addon">,00</span>
                                 </div>
                                 <label for="sup-hasta">Hasta: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">m<sup>2</sup></span> <input
-                                        id="sup-hasta" type="text" class="form-control" name="sup-hasta"
+                                        id="sup-hasta" type="number" class="form-control" name="sup-hasta"
                                         value="<%= request.getParameter("sup-hasta") != null ? request.getParameter("sup-hasta") : "" %>"
                                         placeholder="Hasta"> <span class="input-group-addon">,00</span>
                                 </div>

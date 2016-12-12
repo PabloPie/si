@@ -1,7 +1,5 @@
 package db.vo;
 
-import db.dao.Tablas;
-
 public class ExtrasVO {
     private int idExtra;
     private String nombre;
