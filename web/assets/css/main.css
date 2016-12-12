@@ -1036,7 +1036,7 @@
 		display: inline-block;
 		font-weight: 700;
 		height: 2.75em;
-		width: 8em;
+		width: auto;
 		line-height: 2.75em;
 		padding: 0 1.125em;
 		text-align: center;
@@ -1070,7 +1070,7 @@
 	display: inline-block;
 	font-weight: 700;
 	height: 2.75em;
-	width: 8em;
+	width: auto;
 	line-height: 2.75em;
 	padding: 0 1.125em;
 	text-align: center;

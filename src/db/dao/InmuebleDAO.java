@@ -98,6 +98,55 @@ public class InmuebleDAO {
         return listaInmuebles;
     }
 
+    public static List<InmuebleVO> getInmuebles(String idUsuario, Connection connection) {
+        List<InmuebleVO> listaInmuebles = new ArrayList();
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("SELECT idInmueble, precio, superficie, planta, num_habitaciones, num_bagnos, descripcion, " +
+                "sevende, sealquila, idTipo, idusuario, idpais, idprovincia, poblacion, nombredir, numerodir, idvia FROM " +
+                "inmueble WHERE idusuario == ?");
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(stringBuffer.toString());
+            preparedStatement.setString(1, idUsuario);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                int idInmueble = resultSet.getInt(Tablas.Inmueble.ID_INMUEBLE);
+                double precio = resultSet.getDouble(Tablas.Inmueble.PRECIO);
+                int superficie = resultSet.getInt(Tablas.Inmueble.SUPERFICIE);
+                int planta = resultSet.getInt(Tablas.Inmueble.PLANTA);
+                int numHabitaciones = resultSet.getInt(Tablas.Inmueble.NUM_HABITACIONES);
+                int numBagnos = resultSet.getInt(Tablas.Inmueble.NUM_BAGNOS);
+                String descripcion = resultSet.getString(Tablas.Inmueble.DESCRIPCION);
+                boolean sevende = resultSet.getBoolean(Tablas.Inmueble.SE_VENDE);
+                boolean sealquila = resultSet.getBoolean(Tablas.Inmueble.SE_ALQUILA);
+                int idTipo = resultSet.getInt(Tablas.Inmueble.ID_TIPO_INMUEBLE);
+                String idusuario = resultSet.getString(Tablas.Inmueble.ID_USUARIO);
+                int idPais = resultSet.getInt(Tablas.Inmueble.ID_PAIS);
+                int idProvincia = resultSet.getInt(Tablas.Inmueble.ID_PROVINCIA);
+                String poblacion = resultSet.getString(Tablas.Inmueble.POBLACION);
+                String nombreDir = resultSet.getString(Tablas.Inmueble.NOMBRE_DIR);
+                int numeroDir = resultSet.getInt(Tablas.Inmueble.NUMERO_DIR);
+                int idVia = resultSet.getInt(Tablas.Inmueble.ID_VIA);
+                TipoInmuebleVO tipoInmuebleVO = TipoInmuebleDAO.getTipoInmuebleById(idTipo, connection);
+                LocalizacionVO localizacionVO = LocalizacionDAO.obtenerLocalizacion(idPais, idProvincia, poblacion,
+                        nombreDir, numeroDir, idVia, connection);
+                UsuarioRegistradoVO usuarioVO = UsuarioRegistradoDAO.encontrarDatosUsuario(idusuario, connection);
+                List<ExtrasVO> listaExtrasVO = ExtrasDAO.getExtrasDeUnInmuelbe(idInmueble, connection);
+                List<ImagenVO> listaImagenesVO = ImagenDAO.getImagenes(idInmueble, connection);
+                InmuebleVO inmuebleVO = new InmuebleVO(idInmueble, precio, superficie, planta, numHabitaciones, numBagnos,
+                        descripcion, sevende, sealquila, tipoInmuebleVO, usuarioVO, localizacionVO, listaExtrasVO, listaImagenesVO);
+                listaInmuebles.add(inmuebleVO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaInmuebles;
+    }
+
+
+
     public static List<InmuebleVO> getInmuebles(boolean seAlquilan, boolean seVenden, String palabraClave, int precioDesde,
                                                 int precioHasta, int supDesde, int supHasta, Connection connection) {
         List<InmuebleVO> listaInmuebles = new ArrayList<>();
