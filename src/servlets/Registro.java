@@ -5,6 +5,7 @@ import db.dao.UsuarioRegistradoDAO;
 import db.vo.LocalizacionVO;
 import db.vo.UsuarioRegistradoVO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,30 +17,69 @@ import java.util.HashMap;
 
 public class Registro extends HttpServlet {
 
+    public Registro() {
+        super();
+    }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
+        UsuarioRegistradoVO userVO;
+        HashMap<String, String> errores = new HashMap<>();
+
+        userVO = comprobarErrores(request);
+        if (userVO!=null){
+            WebFacade.crearUsuario(userVO);
+            response.sendRedirect("index.html");
+        }
+        else{
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/ErrorRegistro.jsp");
+            requestDispatcher.forward(request, response);
+        }
+    }
+
+    private UsuarioRegistradoVO comprobarErrores(HttpServletRequest request) {
         String password = request.getParameter("Pass");
         String usuario = request.getParameter("user");
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellido");
         String mail = request.getParameter("Mail");
-        HashMap<String, String> errores = new HashMap<>();
+        String remail = request.getParameter("REMail");
+        String repassword = request.getParameter("REPass");
+        //int telefono = Integer.parseInt(request.getParameter("phone"));
+        //String pais = request.getParameter("pais");
+        //String provincia = request.getParameter("provincia");
+        //String direccion = request.getParameter("nombredir");
+        //int numvia;
+        //String tipovia;
 
+
+        boolean err = false;
+
+        if(password.equals("") || usuario.equals("") || nombre.equals("") || apellidos.equals("") || mail.equals("") || remail.equals("") ||
+                repassword.equals("")){
+            request.setAttribute("CampoVacio", "ERROR: TODOS LOS CAMPOS DEBEN SER RELLENADOS");
+            err = true;
+        }
+
+        if(!repassword.equals(password)){
+            request.setAttribute("mismatchP", "contrasena no coincide");
+            err = true;
+        }
+        if(!mail.equals(remail)){
+            request.setAttribute("mismatchM", "Mail no coincide.");
+            err = true;
+        }
         if(WebFacade.existeUsuario(usuario)){
-            response.sendRedirect("ErrorRegistro.jsp");
+            request.setAttribute("usuarioExiste", "Usuario ya existente.");
+            err = true;
         }
-        else{
-            UsuarioRegistradoVO userVO = new UsuarioRegistradoVO(usuario, nombre,
+        if(!err){
+            return new UsuarioRegistradoVO(usuario, nombre,
                     apellidos, password, 0,
-            mail, null, null);
-            WebFacade.crearUsuario(userVO);
-            response.sendRedirect("index.jsp");
+                    mail, null, null);
+        }else {
+            return null;
         }
-
-
-
-
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

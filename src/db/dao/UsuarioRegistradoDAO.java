@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import db.WebFacade;
 import db.vo.LocalizacionVO;
 import db.vo.PaisVO;
 import db.vo.ProvinciaVO;
@@ -20,7 +21,7 @@ public class UsuarioRegistradoDAO {
         try {
             /* Create "preparedStatement". */
             String queryString = "INSERT INTO usuario_registrado "
-                    + "(idusuario, nombre, apellidos, email, telefono, contraseña, fecha, idpais,"
+                    + "(idusuario, nombre, apellidos, email, telefono, contrasena, fecha, idpais,"
                     + "idprovincia, poblacion, nombredir, numerodir, idvia) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -31,21 +32,30 @@ public class UsuarioRegistradoDAO {
             preparedStatement.setString(1, usuario.getidusuario());
             preparedStatement.setString(2, usuario.getNombre());
             preparedStatement.setString(3, usuario.getApellidos());
-            Date date = Date.valueOf(usuario.getFecha());
-            preparedStatement.setDate(4, date);
-            preparedStatement.setString(5, usuario.getClaveEncriptada());
-            preparedStatement.setInt(6, usuario.getTelefono());
-            preparedStatement.setString(7, usuario.getEmail());
-            LocalizacionVO loc = usuario.getLocation();
-            ProvinciaVO provincia = loc.getProvincia();
-            int idprovincia = provincia.getIdProvincia();
-            PaisVO pais = provincia.getPais();
-            int idpais = pais.getIdPais();
-            String poblacion = loc.getPoblacion();
-            String nombredir = loc.getNombreDir();
-            int numerodir = loc.getNumeroDir();
-            TiposDeViaVO via = loc.getTipoVia();
-            int idvia = via.getIdVia();
+            Date date=null;
+            if(usuario.getFecha()!=null) {
+                date = Date.valueOf(usuario.getFecha());
+            }
+            preparedStatement.setDate(7, date);
+            preparedStatement.setString(6, usuario.getClaveEncriptada());
+            preparedStatement.setInt(5, usuario.getTelefono());
+            preparedStatement.setString(4, usuario.getEmail());
+            LocalizacionVO loc;
+            int idprovincia=0,idpais=0,numerodir=0,idvia=0;
+            String poblacion="",nombredir="";
+            if(usuario.getLocation()!=null) {
+                loc = usuario.getLocation();
+                WebFacade.insertarLocalizacion(loc);
+                ProvinciaVO provincia = loc.getProvincia();
+                idprovincia = provincia.getIdProvincia();
+                PaisVO pais = provincia.getPais();
+                idpais = pais.getIdPais();
+                poblacion = loc.getPoblacion();
+                nombredir = loc.getNombreDir();
+                numerodir = loc.getNumeroDir();
+                TiposDeViaVO via = loc.getTipoVia();
+                idvia = via.getIdVia();
+            }
             preparedStatement.setInt(8, idpais);
             preparedStatement.setInt(9, idprovincia);
             preparedStatement.setString(10, poblacion);
@@ -58,6 +68,8 @@ public class UsuarioRegistradoDAO {
 
             if (insertedRows != 1) {
                 throw new SQLException("Problemas insertando usuario.");
+            }else{
+                System.err.println("Insertado "+usuario.getidusuario()+" en usuario_registrado");
             }
         } catch (Exception e) {
             e.printStackTrace(System.err);
@@ -67,7 +79,7 @@ public class UsuarioRegistradoDAO {
     public static boolean validarUsuario(String usuario, String password, Connection connection){
         boolean encontrado=false;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("Select idusuario,contraseña from usuario_registrado where idusuario=? and contraseña=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("Select idusuario,contrasena from usuario_registrado where idusuario=? and contrasena=?");
             preparedStatement.setString(1, usuario);
             preparedStatement.setString(2, password);
             ResultSet res = preparedStatement.executeQuery();
@@ -102,7 +114,7 @@ public class UsuarioRegistradoDAO {
             /* Create "preparedStatement". */
             String queryString = "UPDATE usuario_registrado "
                     + "SET nombre = ?, apellidos = ?, email = ?, telefono = ?, "
-                    + " contraseña = ?, fecha = ?, idpais = ?, idprovincia = ?, poblacion = ?, nombredir = ?,"
+                    + " contrasena = ?, fecha = ?, idpais = ?, idprovincia = ?, poblacion = ?, nombredir = ?,"
                     + "numerodir = ?, idvia = ? WHERE  idusuario = ?";
             PreparedStatement preparedStatement = connection
                     .prepareStatement(queryString);
@@ -143,13 +155,13 @@ public class UsuarioRegistradoDAO {
             e.printStackTrace(System.err);
         }
     }
-
+    //TODO: CORREGIR TODOS LOS ACCESOS A BASE DE DATOS POR SI HAY NULLS
     public static UsuarioRegistradoVO encontrarDatosUsuario(
             String idusuarioUsuario, Connection connection) {
         UsuarioRegistradoVO usuarioVO = null;
         try {
             /* Create "preparedStatement". */
-            String queryString = "SELECT nombre, apellidos, email, telefono, contraseña, fecha, idpais,"
+            String queryString = "SELECT nombre, apellidos, email, telefono, contrasena, fecha, idpais,"
                     + "idprovincia, poblacion, nombredir, numerodir, idvia from usuario_registrado WHERE  idusuario = ?";
             PreparedStatement preparedStatement = connection
                     .prepareStatement(queryString);
@@ -171,7 +183,10 @@ public class UsuarioRegistradoDAO {
             int telefono = resultSet.getInt(4);
             String claveEncriptada = resultSet.getString(5);
             Date fecha = resultSet.getDate(6);
-            LocalDate date = fecha.toLocalDate();
+            LocalDate date=null;
+            if (fecha!=null) {
+                date = fecha.toLocalDate();
+            }
             int idpais = resultSet.getInt(7);
             int idprovincia = resultSet.getInt(8);
             String poblacion = resultSet.getString(9);
@@ -179,9 +194,14 @@ public class UsuarioRegistradoDAO {
             int numerodir = resultSet.getInt(11);
             int idvia = resultSet.getInt(12);
 
-            LocalizacionVO location = LocalizacionDAO.obtenerLocalizacion(
-                    idpais, idprovincia, poblacion, nombredir, numerodir,
-                    idvia, connection);
+            LocalizacionVO location=null;
+
+            if(idpais!=0 && idprovincia!=0 && !poblacion.equals("") && !nombredir.equals("")
+                    && numerodir!=0 && idvia!=0) {
+                location = LocalizacionDAO.obtenerLocalizacion(
+                        idpais, idprovincia, poblacion, nombredir, numerodir,
+                        idvia, connection);
+            }
 
             usuarioVO = new UsuarioRegistradoVO(idusuarioUsuario, nombre,
                     apellidos, claveEncriptada, telefono, email, date,
