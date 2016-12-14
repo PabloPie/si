@@ -38,7 +38,8 @@ public class InsertarInmueble extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            InmuebleDAO.insertarInmueble(inmuebleVO, connection);
+            int id = InmuebleDAO.insertarInmueble(inmuebleVO, connection);
+            response.sendRedirect("/infoInmueble.jsp?idInmueble=" + id);
         } else {
             request.setAttribute("errores", errores);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/errorPublicarInmueble.jsp");
@@ -64,8 +65,6 @@ public class InsertarInmueble extends HttpServlet {
         }
         int i = 0;
         for (Part p : imagesParts) {
-            // TODO: asegurarse que no existe otro fichero con el mismo nombre
-            // TODO: añadir extensiones a los ficheros
             String uuid = UUID.randomUUID().toString();
             namesList.add(uuid);
             try {

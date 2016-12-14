@@ -118,7 +118,7 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <%
-                            for(int i=0; i<inmueble.getImagenes().size() -1; i++){
+                        for (int i = 0; i < inmueble.getImagenes().size(); i++) {
                             out.println("<div class=\"item active\">");
                             out.println("<img class=\"centrar-v img-responsive\"");
                             out.println("src=\"" + inmueble.getImagenes().get(i).getRuta() + "\">");

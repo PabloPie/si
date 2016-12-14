@@ -76,14 +76,14 @@
                                 <legend>Precio</legend>
                                 <label for="dinero-desde">Desde: </label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">&#8364</span> <input
+                                    <span class="input-group-addon">€</span> <input
                                         id="dinero-desde" type="number" class="form-control" name="dinero-desde"
                                         value="<%= request.getParameter("dinero-desde") != null ? request.getParameter("dinero-desde") : "" %>"
                                         placeholder="Desde"> <span class="input-group-addon">,00</span>
                                 </div>
                                 <label for="dinero-hasta">Hasta: </label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">&#8364</span> <input
+                                    <span class="input-group-addon">€</span> <input
                                         id="dinero-hasta" type="number" class="form-control" name="dinero-hasta"
                                         value="<%= request.getParameter("dinero-hasta") != null ? request.getParameter("dinero-hasta") : "" %>"
                                         placeholder="Hasta"> <span class="input-group-addon">,00</span>
@@ -152,13 +152,13 @@
                     List<InmuebleVO> inmuebleVOList = InmuebleDAO.getInmuebles(seAlquilan, seVenden, palabraBusqueda,
                             dDesde, dHasta, sDesde, sHasta, GestorDeConexionesBD.getConnection());
                     for (InmuebleVO inmuebleVO : inmuebleVOList) {
-                        out.println("<form method=\"post\" action=\"http://localhost:8080/infoInmueble.jsp\">");
+                        out.println("<form method=\"get\" action=\"http://localhost:8080/infoInmueble.jsp\">");
                         out.println("<input id=\"idInmueble\" type=\"hidden\" name=\"idInmueble\" value=\""
                                 + inmuebleVO.getIdInmueble() + "\">");
                         out.println("<div class=\"col-md-4 col-sm-4\">");
-                        out.println("<button type=\"submit\" class=\"caja-piso thumbnail\">");
-                        out.println("<img class=\"img-responsive\" src=\"" + inmuebleVO.getImagenes().get(0).getRuta()
-                                + "\" alt=\"placeholder\" width=\"225\" height=\"300\"/>");
+                        out.println("<button type=\"submit\" class=\"caja-piso\" >");
+                        out.println("<img src=\"" + inmuebleVO.getImagenes().get(0).getRuta()
+                                + "\" alt=\"placeholder\"/>");
                         out.println("<div class=\"caption\">");
                         out.println("<p>" + inmuebleVO.getPrecio() + " €<p>");
                         out.println("<p>" + inmuebleVO.getNumHabitaciones() + " habitaciones</p>");

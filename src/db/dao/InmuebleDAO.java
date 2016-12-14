@@ -8,7 +8,7 @@ import db.vo.*;
 
 public class InmuebleDAO {
 
-    public static void insertarInmueble(InmuebleVO inmueble, Connection connection) {
+    public static int insertarInmueble(InmuebleVO inmueble, Connection connection) {
         String query = "INSERT INTO inmueble(precio,superficie, planta,num_habitaciones,num_bagnos,descripcion,sevende,"
                 + "sealquila,idTipo,idusuario,idpais,idprovincia,poblacion,nombredir,numerodir,idvia) VALUES" +
                 " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -47,10 +47,11 @@ public class InmuebleDAO {
                 i.setIdInmueble(idInm);
             }
             ImagenDAO.insertarImagenes(inmueble.getImagenes(), connection);
-
+            return idInm;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return -1;
     }
 
     public static InmuebleVO getInmuebles(int idInm, Connection connection) {

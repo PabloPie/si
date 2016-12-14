@@ -2,6 +2,9 @@
     border-style: solid;
     border-color: #373b41;
     border-width: 0px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
     margin-bottom: 30px;
     display: inline-block;
     -webkit-box-shadow: 0px 0px 10px -1px rgba(0,0,0,0.75);
@@ -18,7 +21,15 @@
 .caja-piso img {
     border-style: solid;
     border-color: #373b41;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    object-fit: cover;
     border-width: 0px 0px 0px 0px;
+    width: 240px;
+    height: 180px;
+    margin-left: -6px;
+    margin-right: -6px;
+    margin-bottom: 10px;
 }
 
 .caja-piso .descripcion {
