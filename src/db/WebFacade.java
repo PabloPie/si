@@ -24,7 +24,23 @@ public class WebFacade {
             }
         }
     }
-
+     public static void borrarUsuario(String usuario){
+         Connection connection = null;
+         System.out.println("Inicio borrado usuario...");
+         try{
+             connection = GestorDeConexionesBD.getConnection();
+             UsuarioRegistradoDAO.borrarUsuario(usuario,connection);
+             connection.close();
+         } catch (Exception e) {
+             e.printStackTrace(System.err);
+         } finally{
+             try {
+                 connection.close();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }
+         }
+     }
 
 	public static boolean existeUsuario(String usuario){
         Connection connection = null;
@@ -84,6 +100,24 @@ public class WebFacade {
             }
         }
 	}
+
+	public static void actualizarUsuario(UsuarioRegistradoVO usuario){
+        Connection connection = null;
+        System.out.println("Inicio modificación de usuario...");
+        try{
+            connection = GestorDeConexionesBD.getConnection();
+            UsuarioRegistradoDAO.actualizarUsuario(usuario,connection);
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally{
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 	public static void crearPais(PaisVO pais) throws SQLException{
 		Connection connection = null;

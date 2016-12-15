@@ -20,7 +20,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession(true);
         String password = request.getParameter("password");
         String usuario = request.getParameter("user");
-        if (WebFacade.comprobarUsuario(usuario,password) && password!="" && usuario!=""){
+        if (WebFacade.comprobarUsuario(usuario,password) && !password.equals("") && !usuario.equals("")){
             session.setAttribute("currentSessionUser",usuario);
             response.sendRedirect("perfil.jsp");
         }

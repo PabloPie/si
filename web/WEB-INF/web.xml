@@ -11,7 +11,21 @@
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/errorInterno.jsp</location>
+    </error-page>
     <display-name>Jaus</display-name>
+
+    <servlet>
+        <servlet-name>UpdateUserdata</servlet-name>
+        <servlet-class>servlets.UpdateUserdata</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateUserdata</servlet-name>
+        <url-pattern>/UpdateUserdata.do</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>Registro</servlet-name>
         <servlet-class>servlets.Registro</servlet-class>

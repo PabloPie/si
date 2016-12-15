@@ -1,10 +1,6 @@
 package db.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.*;
 import java.time.LocalDate;
 
 import db.WebFacade;
@@ -32,36 +28,17 @@ public class UsuarioRegistradoDAO {
             preparedStatement.setString(1, usuario.getidusuario());
             preparedStatement.setString(2, usuario.getNombre());
             preparedStatement.setString(3, usuario.getApellidos());
-            Date date=null;
-            if(usuario.getFecha()!=null) {
-                date = Date.valueOf(usuario.getFecha());
-            }
-            preparedStatement.setDate(7, date);
-            preparedStatement.setString(6, usuario.getClaveEncriptada());
-            preparedStatement.setInt(5, usuario.getTelefono());
             preparedStatement.setString(4, usuario.getEmail());
-            LocalizacionVO loc;
-            int idprovincia=0,idpais=0,numerodir=0,idvia=0;
-            String poblacion="",nombredir="";
-            if(usuario.getLocation()!=null) {
-                loc = usuario.getLocation();
-                WebFacade.insertarLocalizacion(loc);
-                ProvinciaVO provincia = loc.getProvincia();
-                idprovincia = provincia.getIdProvincia();
-                PaisVO pais = provincia.getPais();
-                idpais = pais.getIdPais();
-                poblacion = loc.getPoblacion();
-                nombredir = loc.getNombreDir();
-                numerodir = loc.getNumeroDir();
-                TiposDeViaVO via = loc.getTipoVia();
-                idvia = via.getIdVia();
-            }
-            preparedStatement.setInt(8, idpais);
-            preparedStatement.setInt(9, idprovincia);
-            preparedStatement.setString(10, poblacion);
-            preparedStatement.setString(11, nombredir);
-            preparedStatement.setInt(12, numerodir);
-            preparedStatement.setInt(13, idvia);
+            preparedStatement.setNull(5,Types.INTEGER);
+            preparedStatement.setString(6, usuario.getClaveEncriptada());
+            preparedStatement.setNull(7, Types.DATE);
+            preparedStatement.setNull(8, Types.INTEGER);
+            preparedStatement.setNull(9, Types.INTEGER);
+            preparedStatement.setNull(10, Types.VARCHAR);
+            preparedStatement.setNull(11, Types.VARCHAR);
+            preparedStatement.setNull(12, Types.INTEGER);
+            preparedStatement.setNull(13, Types.INTEGER);
+
 
             /* Execute query. */
             int insertedRows = preparedStatement.executeUpdate();
@@ -120,30 +97,51 @@ public class UsuarioRegistradoDAO {
                     .prepareStatement(queryString);
 
             /* Fill "preparedStatement". */
+            preparedStatement.setString(13, usuario.getidusuario());
             preparedStatement.setString(1, usuario.getNombre());
             preparedStatement.setString(2, usuario.getApellidos());
-            preparedStatement.setString(3, usuario.getEmail());
-            preparedStatement.setInt(4, usuario.getTelefono());
+            Date date=null;
+            if(usuario.getFecha()!=null) {
+                date = Date.valueOf(usuario.getFecha());
+                preparedStatement.setDate(6, date);
+            }else{
+                preparedStatement.setNull(6, Types.DATE);
+            }
             preparedStatement.setString(5, usuario.getClaveEncriptada());
-            Date date = Date.valueOf(usuario.getFecha());
-            preparedStatement.setDate(6, date);
-            LocalizacionVO loc = usuario.getLocation();
-            ProvinciaVO provincia = loc.getProvincia();
-            int idprovincia = provincia.getIdProvincia();
-            PaisVO pais = provincia.getPais();
-            int idpais = pais.getIdPais();
-            String poblacion = loc.getPoblacion();
-            String nombredir = loc.getNombreDir();
-            int numerodir = loc.getNumeroDir();
-            TiposDeViaVO via = loc.getTipoVia();
-            int idvia = via.getIdVia();
-            preparedStatement.setInt(7, idpais);
-            preparedStatement.setInt(8, idprovincia);
-            preparedStatement.setString(9, poblacion);
-            preparedStatement.setString(10, nombredir);
-            preparedStatement.setInt(11, numerodir);
-            preparedStatement.setInt(12, idvia);
-            preparedStatement.setString(13, usuario.getidusuario());
+            if(usuario.getTelefono()!=0){
+                preparedStatement.setInt(4, usuario.getTelefono());
+            }else{
+                preparedStatement.setNull(4,Types.INTEGER);
+            }
+            preparedStatement.setString(3, usuario.getEmail());
+            LocalizacionVO loc;
+            if(usuario.getLocation()!=null) {
+                loc = usuario.getLocation();
+                WebFacade.insertarLocalizacion(loc);
+                ProvinciaVO provincia = loc.getProvincia();
+                int idprovincia = provincia.getIdProvincia();
+                PaisVO pais = provincia.getPais();
+                int idpais = pais.getIdPais();
+                String poblacion = loc.getPoblacion();
+                String nombredir = loc.getNombreDir();
+                int numerodir = loc.getNumeroDir();
+                TiposDeViaVO via = loc.getTipoVia();
+                int idvia = via.getIdVia();
+
+                preparedStatement.setInt(7, idpais);
+                preparedStatement.setInt(8, idprovincia);
+                preparedStatement.setString(9, poblacion);
+                preparedStatement.setString(10, nombredir);
+                preparedStatement.setInt(11, numerodir);
+                preparedStatement.setInt(12, idvia);
+            }else{
+                preparedStatement.setNull(8, Types.INTEGER);
+                preparedStatement.setNull(9, Types.INTEGER);
+                preparedStatement.setNull(10, Types.VARCHAR);
+                preparedStatement.setNull(11, Types.VARCHAR);
+                preparedStatement.setNull(12, Types.INTEGER);
+                preparedStatement.setNull(13, Types.INTEGER);
+            }
 
             /* Execute query. */
             int insertedRows = preparedStatement.executeUpdate();
@@ -155,6 +153,20 @@ public class UsuarioRegistradoDAO {
             e.printStackTrace(System.err);
         }
     }
+
+    public static void borrarUsuario(String usuario, Connection connection){
+        try{
+            String queryString = "DELETE FROM usuario_registrado WHERE idusuario = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString);
+            preparedStatement.setString(1, usuario);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //TODO: CORREGIR TODOS LOS ACCESOS A BASE DE DATOS POR SI HAY NULLS
     public static UsuarioRegistradoVO encontrarDatosUsuario(
             String idusuarioUsuario, Connection connection) {

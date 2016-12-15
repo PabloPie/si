@@ -24,8 +24,6 @@ public class Registro extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         UsuarioRegistradoVO userVO;
-        HashMap<String, String> errores = new HashMap<>();
-
         userVO = comprobarErrores(request);
         if (userVO!=null){
             WebFacade.crearUsuario(userVO);
@@ -45,13 +43,6 @@ public class Registro extends HttpServlet {
         String mail = request.getParameter("Mail");
         String remail = request.getParameter("REMail");
         String repassword = request.getParameter("REPass");
-        //int telefono = Integer.parseInt(request.getParameter("phone"));
-        //String pais = request.getParameter("pais");
-        //String provincia = request.getParameter("provincia");
-        //String direccion = request.getParameter("nombredir");
-        //int numvia;
-        //String tipovia;
-
 
         boolean err = false;
 
@@ -62,7 +53,7 @@ public class Registro extends HttpServlet {
         }
 
         if(!repassword.equals(password)){
-            request.setAttribute("mismatchP", "contrasena no coincide");
+            request.setAttribute("mismatchP", "Contraseña no coincide");
             err = true;
         }
         if(!mail.equals(remail)){
