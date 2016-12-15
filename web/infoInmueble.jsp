@@ -109,19 +109,34 @@
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <%
+                        if (inmueble.getImagenes().size() >0){
+                            out.println("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>");
+                            if(inmueble.getImagenes().size()>1){
+                                for (int i = 1; i < inmueble.getImagenes().size(); i++) {
+                                   out.println("<li data-target=\"#myCarousel\" data-slide-to=\"" + i +"\"></li>");
+                                }
+
+                            }
+                        }
+
+                    %>
                 </ol>
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <%
-                        for (int i = 0; i < inmueble.getImagenes().size(); i++) {
+                        if(inmueble.getImagenes().size() > 0){
+                            for (int i = 0; i < inmueble.getImagenes().size(); i++) {
+                                out.println("<div class=\"item active\">");
+                                out.println("<img class=\"centrar-v img-responsive\"");
+                                out.println("src=\"" + inmueble.getImagenes().get(i).getRuta() + "\">");
+                                out.println("</div>");
+                            }
+                        }else{
                             out.println("<div class=\"item active\">");
                             out.println("<img class=\"centrar-v img-responsive\"");
-                            out.println("src=\"" + inmueble.getImagenes().get(i).getRuta() + "\">");
+                            out.println("src=\"http://es-discount.cstatics.com//v3/img/default.jpg\">");
                             out.println("</div>");
                         }
                     %>
