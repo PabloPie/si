@@ -58,6 +58,7 @@
     int cp = 0;
     int tlf = 0;
     int idvia = 0;
+    int numdir = 0;
     if (user != null) {
         if (user.getFecha() != null) {
             fecha = user.getFecha().toString();
@@ -67,7 +68,8 @@
         }
         if (user.getLocation() != null) {
             idvia = user.getLocation().getTipoVia().getIdVia();
-            dir = user.getLocation().getNombreDir() + ", " + user.getLocation().getNumeroDir();
+            dir = user.getLocation().getNombreDir();
+            numdir = user.getLocation().getNumeroDir();
             poblacion = user.getLocation().getPoblacion();
             idprovincia = user.getLocation().getProvincia().getIdProvincia();
             provincia = user.getLocation().getProvincia().getNombreProvincia();
@@ -110,7 +112,7 @@
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" action="http://localhost:8080/UpdateUserdata.do" method="POST">
             <fieldset>
 
                 <!-- Info personal -->
@@ -118,62 +120,62 @@
 
                 <!-- Nombre-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="idnombre">Nombre</label>
+                    <label class="col-sm-2 control-label" for="nombre">Nombre</label>
                     <div class="col-sm-10">
-                        <input type="text" placeholder="Pepito" value="<%=user.getNombre()%>" id="idnombre"
+                        <input type="text" placeholder="Pepito" value="<%=user.getNombre()%>" id="nombre"
                                class="form-control" name="nombre">
                     </div>
                 </div>
 
                 <!-- Apellidos-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="idapellidos">Apellidos</label>
+                    <label class="col-sm-2 control-label" for="apellidos">Apellidos</label>
                     <div class="col-sm-10">
-                        <input type="text" placeholder="García García" value="<%=user.getApellidos()%>" id="idapellidos"
+                        <input type="text" placeholder="García García" value="<%=user.getApellidos()%>" id="apellidos"
                                class="form-control" name="apellidos">
                     </div>
                 </div>
 
                 <!-- Correo-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="idemail">Email</label>
+                    <label class="col-sm-2 control-label" for="email">Email</label>
                     <div class="col-sm-10">
                         <input type="email" value="<%=user.getEmail()%>" placeholder="pepito@correopepito.com"
-                               id="idemail" class="form-control" name="email">
+                               id="email" class="form-control" name="email">
                     </div>
                 </div>
 
                 <!-- Fecha de nacimiento-->
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="input-date">Fecha de Nacimiento</label>
+                    <label class="control-label col-sm-2" for="fecha">Fecha de Nacimiento</label>
                     <div class="col-sm-10">
-                        <input type="date" value="<%=fecha%>" id="input-date" class="form-control" name="fecha">
+                        <input type="date" value="<%=fecha%>" id="fecha" class="form-control" name="fecha">
                     </div>
                 </div>
 
                 <!-- Telefono-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="Telefono">Teléfono</label>
+                    <label class="col-sm-2 control-label" for="telefono">Teléfono</label>
                     <div class="col-sm-10">
-                        <input type="tel" <%if(tlf>0) out.println("value=\"" + tlf +"");%>"
-                               id="Telefono" class="form-control" name="telefono">
+                        <input type="tel" <%if(tlf>0) out.println("value=\"" + tlf + "\"");%>
+                               id="telefono" class="form-control" name="telefono">
                     </div>
                 </div>
 
                 <!-- contrasena-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="Password">contrasena</label>
+                    <label class="col-sm-2 control-label" for="password">Contraseña</label>
                     <div class="col-sm-10">
-                        <input type="password" placeholder="**********" id="Password" class="form-control"
+                        <input type="password" placeholder="**********" id="password" class="form-control"
                                name="password">
                     </div>
                 </div>
 
                 <!-- Confirmar contrasena-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="REPassword">Repetir contrasena</label>
+                    <label class="col-sm-2 control-label" for="repassword">Repetir Contraseña</label>
                     <div class="col-sm-10">
-                        <input type="password" placeholder="**********" id="REPassword" class="form-control"
+                        <input type="password" placeholder="**********" id="repassword" class="form-control"
                                name="repassword">
                     </div>
                 </div>
@@ -183,17 +185,22 @@
 
                 <!-- Dir 1-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="linea1">Linea 1</label>
+                    <label class="col-sm-2 control-label" for="direccion">Dirección</label>
                     <div class="col-sm-10">
-                        <input type="text" value="<%=dir%>" placeholder="Dirección Linea 1" id="linea1"
-                               class="form-control" name="direccion1">
+                        <input type="text" value="<%=dir%>" placeholder="Dirección" id="direccion"
+                               class="form-control" name="direccion">
                     </div>
                 </div>
 
-                <!-- Dir 2-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="tipo-via">Linea 2</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 control-label" for="numdir">Número</label>
+                    <div class="col-sm-4">
+                        <input type="text" <%if(cp>0) out.println("value=\"" + numdir + "\"");%> placeholder="Número" id="numdir"
+                               class="form-control" name="numdir">
+                    </div>
+
+                    <label class="col-sm-2 control-label" for="tipo-via">Tipo de Vía</label>
+                    <div class="col-sm-4">
                         <select name="tipo-via" class="form-control" id="tipo-via">
                             <% List<TiposDeViaVO> tiposDeVia = TiposDeViaDAO.
                                     obtenerTodosTiposDeVia(GestorDeConexionesBD.getConnection());
@@ -210,12 +217,14 @@
                     </div>
                 </div>
 
-                <!-- Ciudad-->
+
+
+                <!-- Poblacion-->
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="ciudad">Ciudad</label>
+                    <label class="col-sm-2 control-label" for="poblacion">Población</label>
                     <div class="col-sm-10">
-                        <input type="text" value="<%=poblacion%>" placeholder="Ciudad"
-                               id="ciudad" class="form-control" name="ciudad">
+                        <input type="text" value="<%=poblacion%>" placeholder="Población"
+                               id="poblacion" class="form-control" name="poblacion">
                     </div>
                 </div>
 
@@ -239,10 +248,10 @@
                     </div>
 
                     <!-- CP-->
-                    <label class="col-sm-2 control-label" for="codpost">CP</label>
+                    <label class="col-sm-2 control-label" for="cp">CP</label>
                     <div class="col-sm-4">
-                        <input type="text" <%if(cp>0) out.println("value=\"" + cp + "");%> placeholder="Código Postal"
-                               id="codpost" class="form-control" name="codigopostal">
+                        <input type="text" <%if(cp>0) out.println("value=\"" + cp + "\"");%> placeholder="Código Postal"
+                               id="cp" class="form-control" name="cp">
                     </div>
                 </div>
 

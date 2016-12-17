@@ -135,12 +135,12 @@ public class UsuarioRegistradoDAO {
                 preparedStatement.setInt(11, numerodir);
                 preparedStatement.setInt(12, idvia);
             }else{
+                preparedStatement.setNull(7, Types.INTEGER);
                 preparedStatement.setNull(8, Types.INTEGER);
-                preparedStatement.setNull(9, Types.INTEGER);
+                preparedStatement.setNull(9, Types.VARCHAR);
                 preparedStatement.setNull(10, Types.VARCHAR);
-                preparedStatement.setNull(11, Types.VARCHAR);
+                preparedStatement.setNull(11, Types.INTEGER);
                 preparedStatement.setNull(12, Types.INTEGER);
-                preparedStatement.setNull(13, Types.INTEGER);
             }
 
             /* Execute query. */
@@ -208,7 +208,7 @@ public class UsuarioRegistradoDAO {
 
             LocalizacionVO location=null;
 
-            if(idpais!=0 && idprovincia!=0 && !poblacion.equals("") && !nombredir.equals("")
+            if(idpais!=0 && idprovincia!=0 && poblacion!=null && nombredir!=null
                     && numerodir!=0 && idvia!=0) {
                 location = LocalizacionDAO.obtenerLocalizacion(
                         idpais, idprovincia, poblacion, nombredir, numerodir,

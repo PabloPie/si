@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class GestorDeConexionesBD {
 
     private final static String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
-    private final static String DRIVER_URL = "jdbc:mysql://192.168.1.50/jaus";
+    private final static String DRIVER_URL = "jdbc:mysql://localhost/jaus";
     private final static String USER = "torodecobre";
     private final static String PASSWORD = "margotSI";
 

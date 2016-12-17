@@ -83,14 +83,14 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                     %>
                     <label for="IDREmail">Repite E-mail:</label><input type="email" name="REMail" id="IDREMail"/><br/>
 
-                    <label for="IDPass">contrasena:</label><input type="password" name="Pass" id="IDPass"/><br/>
+                    <label for="IDPass">Contraseña:</label><input type="password" name="Pass" id="IDPass"/><br/>
                     <%
                         if(null!=request.getAttribute("mismatchP"))
                         {
                             out.println(request.getAttribute("mismatchP"));
                         }
                     %>
-                    <label for="IDREPass">Repite contrasena:</label><input type="password" name="REPass" id="IDREPass"/><br/>
+                    <label for="IDREPass">Repite contraseña:</label><input type="password" name="REPass" id="IDREPass"/><br/>
 
                     <p>Nota: todos los campos son obligatorios</p>
                     <div class="modal-footer">

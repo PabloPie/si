@@ -1,5 +1,9 @@
 package db.vo;
 
+import db.WebFacade;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 
 public class UsuarioRegistradoVO {
@@ -70,8 +74,7 @@ public class UsuarioRegistradoVO {
         return this.claveEncriptada;
     }
 
-    public void setClaveEncriptada(String claveEncriptada) {
-        this.claveEncriptada = claveEncriptada;
+    public void setClaveEncriptada(String claveEncriptada) { this.claveEncriptada = claveEncriptada;
     }
 
     public int getTelefono() {

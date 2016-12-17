@@ -37,6 +37,7 @@ public class Registro extends HttpServlet {
 
     private UsuarioRegistradoVO comprobarErrores(HttpServletRequest request) {
         String password = request.getParameter("Pass");
+
         String usuario = request.getParameter("user");
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellido");
@@ -65,6 +66,7 @@ public class Registro extends HttpServlet {
             err = true;
         }
         if(!err){
+            password = WebFacade.hashPass(password);
             return new UsuarioRegistradoVO(usuario, nombre,
                     apellidos, password, 0,
                     mail, null, null);
