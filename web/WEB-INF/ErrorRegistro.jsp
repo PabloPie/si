@@ -17,11 +17,11 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/main.css" />
     <!--[if lte IE 8]>
-    <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <script src="../assets/js/ie/html5shiv.js"></script><![endif]-->
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="assets/css/ie8.css"/><![endif]-->
+    <link rel="stylesheet" href="../assets/css/ie8.css"/><![endif]-->
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ie9.css"/><![endif]-->
+    <link rel="stylesheet" href="../assets/css/ie9.css"/><![endif]-->
 
 </head>
 <body>

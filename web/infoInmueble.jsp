@@ -2,8 +2,6 @@
 <%@ page import="db.dao.InmuebleDAO" %>
 <%@ page import="db.vo.InmuebleVO" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="db.vo.ImagenVO" %>
-<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
 <html lang="es">
@@ -26,8 +24,7 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
           crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/infoInmueble.css">
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -44,25 +41,48 @@
         e.printStackTrace();
     }
 %>
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#mi-navbar"
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mi-navbar"
                     aria-expanded="false">
-                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Jaus</a>
+            <a class="navbar-brand" href="index.html">Jaus</a>
         </div>
+
+        <%
+            String idUser = (String) session.getAttribute("currentSessionUser");
+            if (idUser != null) {
+        %>
+
         <div class="collapse navbar-collapse" id="mi-navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-                    Mi cuenta</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Mi cuenta <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="perfilActividad.jsp">Ver Actividad</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="perfil.jsp">Modificar Perfil</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="cerrarSersion.do">Cerrar sesión</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
+
+        <%
+            }
+        %>
     </div>
 </nav>
+
 <div class="container">
     <div class="page-header">
         <h1>
@@ -85,7 +105,7 @@
                         <p><%=inmueble.getPlanta()%>
                         </p></li>
                     <li><span class="titulos">Metros cuadrados:</span>
-                        <p><%=inmueble.getSuperficie()%><sup>2</sup></p></li>
+                        <p><%=inmueble.getSuperficie()%> m<sup>2</sup></p></li>
                     <li><span class="titulos">Número de habitaciones:</span>
                         <p><%=inmueble.getNumHabitaciones()%>
                         </p></li>
@@ -110,13 +130,10 @@
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <%
-                        if (inmueble.getImagenes().size() >0){
+                        if (inmueble.getImagenes().size() > 1) {
                             out.println("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>");
-                            if(inmueble.getImagenes().size()>1){
-                                for (int i = 1; i < inmueble.getImagenes().size(); i++) {
-                                   out.println("<li data-target=\"#myCarousel\" data-slide-to=\"" + i +"\"></li>");
-                                }
-
+                            for (int i = 1; i < inmueble.getImagenes().size(); i++) {
+                                out.println("<li data-target=\"#myCarousel\" data-slide-to=\"" + i + "\"></li>");
                             }
                         }
 
@@ -126,14 +143,18 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <%
-                        if(inmueble.getImagenes().size() > 0){
-                            for (int i = 0; i < inmueble.getImagenes().size(); i++) {
-                                out.println("<div class=\"item active\">");
+                        if (inmueble.getImagenes().size() > 0) {
+                            out.println("<div class=\"item active\">");
+                            out.println("<img class=\"centrar-v img-responsive\"");
+                            out.println("src=\"" + inmueble.getImagenes().get(0).getRuta() + "\">");
+                            out.println("</div>");
+                            for (int i = 1; i < inmueble.getImagenes().size(); i++) {
+                                out.println("<div class=\"item\">");
                                 out.println("<img class=\"centrar-v img-responsive\"");
                                 out.println("src=\"" + inmueble.getImagenes().get(i).getRuta() + "\">");
                                 out.println("</div>");
                             }
-                        }else{
+                        } else {
                             out.println("<div class=\"item active\">");
                             out.println("<img class=\"centrar-v img-responsive\"");
                             out.println("src=\"http://es-discount.cstatics.com//v3/img/default.jpg\">");
@@ -142,16 +163,20 @@
                     %>
                 </div>
 
-                <!-- Left and right controls -->
+                <%
+                    if (inmueble.getImagenes().size() > 1) {
+                %>
                 <a class="left carousel-control" href="#myCarousel" role="button"
-                   data-slide="prev"> <span
-                        class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                   data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                     <span class="sr-only">Anterior</span>
-                </a> <a class="right carousel-control" href="#myCarousel" role="button"
-                        data-slide="next"> <span
-                    class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Siguiente</span>
-            </a>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button"
+                   data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+                <%
+                    }
+                %>
             </div>
         </div>
     </div>
@@ -169,8 +194,7 @@
             <div class="page-header">
                 <h2>Información de contacto</h2>
             </div>
-            <span class="titulos glyphicon glyphicon-earphone"
-                  aria-hidden="true">976555555</span>
+            <span class="titulos glyphicon glyphicon-earphone" aria-hidden="true">976555555</span>
         </div>
     </div>
     <div class="page-header">
@@ -179,14 +203,12 @@
     <div class="row">
         <div class="col-md-3 col-md-offset-3">
             <div class="form-group">
-                <label for="id-nombre">Nombre:</label> <input type="text"
-                                                              class="form-control" id="id-nombre">
+                <label for="id-nombre">Nombre:</label> <input type="text" class="form-control" id="id-nombre">
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="id-email">Email:</label> <input type="email"
-                                                            class="form-control" id="id-email">
+                <label for="id-email">Email:</label> <input type="email" class="form-control" id="id-email">
             </div>
         </div>
     </div>

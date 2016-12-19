@@ -102,7 +102,7 @@ public class InmuebleDAO {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("SELECT idInmueble, precio, superficie, planta, num_habitaciones, num_bagnos, descripcion, " +
                 "sevende, sealquila, idTipo, idusuario, idpais, idprovincia, poblacion, nombredir, numerodir, idvia FROM " +
-                "inmueble WHERE idusuario == ?");
+                "inmueble WHERE idusuario = ?");
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(stringBuffer.toString());
@@ -110,7 +110,6 @@ public class InmuebleDAO {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-
                 int idInmueble = resultSet.getInt(Tablas.Inmueble.ID_INMUEBLE);
                 double precio = resultSet.getDouble(Tablas.Inmueble.PRECIO);
                 int superficie = resultSet.getInt(Tablas.Inmueble.SUPERFICIE);
@@ -143,7 +142,6 @@ public class InmuebleDAO {
         }
         return listaInmuebles;
     }
-
 
 
     public static List<InmuebleVO> getInmuebles(boolean seAlquilan, boolean seVenden, String palabraClave, int precioDesde,

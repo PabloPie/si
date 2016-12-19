@@ -6,10 +6,7 @@ import db.vo.*;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
@@ -89,7 +86,9 @@ public class InsertarInmueble extends HttpServlet {
             IOException {
         UsuarioRegistradoVO usuarioDePrueba = null;
         try {
-            usuarioDePrueba = UsuarioRegistradoDAO.encontrarDatosUsuario("paco", GestorDeConexionesBD
+            HttpSession session = request.getSession(true);
+            String idUser = (String) session.getAttribute("currentSessionUser");
+            usuarioDePrueba = UsuarioRegistradoDAO.encontrarDatosUsuario(idUser, GestorDeConexionesBD
                     .getConnection());
         } catch (SQLException e) {
             e.printStackTrace();

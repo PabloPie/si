@@ -21,11 +21,9 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
           crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/infoInmueble.css">
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 </head>
@@ -34,18 +32,29 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#mi-navbar"
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mi-navbar"
                     aria-expanded="false">
-                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Jaus</a>
+            <a class="navbar-brand" href="index.html">Jaus</a>
         </div>
         <div class="collapse navbar-collapse" id="mi-navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-                    Mi cuenta</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Mi cuenta <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="perfilActividad.jsp">Ver Actividad</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="perfil.jsp">Modificar Perfil</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="cerrarSersion.do">Cerrar sesión</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -98,12 +107,17 @@
                         <label class="col-md-4 control-label" for="tipo-inmueble">Tipo de inmueble:</label>
                         <div class="col-md-5">
                             <select name="tipo-inmueble" class="form-control" id="tipo-inmueble">
-                                <% List<TipoInmuebleVO> tiposDeInmueble = TipoInmuebleDAO.
-                                        getAllTipoInmueble(GestorDeConexionesBD.getConnection());
+                                <%
+                                    List<TipoInmuebleVO> tiposDeInmueble = TipoInmuebleDAO.
+                                            getAllTipoInmueble(GestorDeConexionesBD.getConnection());
                                     for (TipoInmuebleVO t : tiposDeInmueble) {
-                                        out.println("<option " + "value=\"" + t.getIdTipo() + "\">" + t.getNombreTipo() +
-                                                "</option>");
-                                    }%>
+                                %>
+                                <option value="<%=t.getIdTipo()%>">
+                                    <%=t.getNombreTipo()%>
+                                </option>
+                                <%
+                                    }
+                                %>
                             </select>
                         </div>
                     </div>
@@ -131,9 +145,13 @@
                                     <% List<PaisVO> paises = PaisDAO.
                                             obtenerTodoLosPaises(GestorDeConexionesBD.getConnection());
                                         for (PaisVO pais : paises) {
-                                            out.println("<option " + "value=\"" + pais.getIdPais() + "\">" +
-                                                    pais.getNombrePais() + "</option>");
-                                        }%>
+                                    %>
+                                    <option value="<%=pais.getIdPais()%>">
+                                        <%=pais.getNombrePais()%>
+                                    </option>
+                                    <%
+                                        }
+                                    %>
                                 </select>
                             </div>
                         </div>
@@ -144,9 +162,13 @@
                                     <% List<ProvinciaVO> provincias = ProvinciaDAO.
                                             obtenerTodasLasProvincias(GestorDeConexionesBD.getConnection());
                                         for (ProvinciaVO t : provincias) {
-                                            out.println("<option " + "value=\"" + t.getIdProvincia() + "\">" +
-                                                    t.getNombreProvincia() + "</option>");
-                                        }%>
+                                    %>
+                                    <option value="<%=t.getIdProvincia()%>">
+                                        <%=t.getNombreProvincia()%>
+                                    </option>
+                                    <%
+                                        }
+                                    %>
                                 </select>
                             </div>
                         </div>
@@ -171,9 +193,13 @@
                                     <% List<TiposDeViaVO> tiposDeVia = TiposDeViaDAO.
                                             obtenerTodosTiposDeVia(GestorDeConexionesBD.getConnection());
                                         for (TiposDeViaVO t : tiposDeVia) {
-                                            out.println("<option " + "value=\"" + t.getIdVia() + "\">" +
-                                                    t.getNombreTipo() + "</option>");
-                                        }%>
+                                    %>
+                                    <option value="<%=t.getIdVia()%>">
+                                        <%=t.getNombreTipo()%>
+                                    </option>
+                                    <%
+                                        }
+                                    %>
                                 </select>
                             </div>
                         </div>
@@ -195,12 +221,17 @@
                     <fieldset>
                         <legend>Extras</legend>
                         <div class="form-group col-md-12">
-                            <% List<ExtrasVO> extras = ExtrasDAO.
-                                    getAllExtras(GestorDeConexionesBD.getConnection());
+                            <%
+                                List<ExtrasVO> extras = ExtrasDAO.getAllExtras(GestorDeConexionesBD.getConnection());
                                 for (ExtrasVO e : extras) {
-                                    out.println("<label class=\"checkbox-inline\"><input name=\"extras\" " +
-                                            "type=\"checkbox\" value=\"" + e.getIdExtra() + "\">" + e.getNombre() + "</label>");
-                                }%>
+                            %>
+                            <label class="checkbox-inline">
+                                <input name="extras" type="checkbox" value="<%=e.getIdExtra()%>">
+                                <%=e.getNombre()%>
+                            </label>
+                            <%
+                                }
+                            %>
                         </div>
                     </fieldset>
                     <fieldset>

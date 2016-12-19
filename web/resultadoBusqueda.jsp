@@ -36,25 +36,44 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#mi-navbar"
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mi-navbar"
                     aria-expanded="false">
-                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Jaus</a>
+            <a class="navbar-brand" href="index.html">Jaus</a>
         </div>
+
+        <%
+            String idUser = (String) session.getAttribute("currentSessionUser");
+            if (idUser != null) {
+        %>
+
         <div class="collapse navbar-collapse" id="mi-navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-                    Mi cuenta</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Mi cuenta <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="perfilActividad.jsp">Ver Actividad</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="perfil.jsp">Modificar Perfil</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="cerrarSersion.do">Cerrar sesión</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
+        <%
+            }
+        %>
     </div>
 </nav>
 
@@ -152,23 +171,23 @@
                     List<InmuebleVO> inmuebleVOList = InmuebleDAO.getInmuebles(seAlquilan, seVenden, palabraBusqueda,
                             dDesde, dHasta, sDesde, sHasta, GestorDeConexionesBD.getConnection());
                     for (InmuebleVO inmuebleVO : inmuebleVOList) {
-                        out.println("<form method=\"get\" action=\"http://localhost:8080/infoInmueble.jsp\">");
-                        out.println("<input id=\"idInmueble\" type=\"hidden\" name=\"idInmueble\" value=\""
-                                + inmuebleVO.getIdInmueble() + "\">");
-                        out.println("<div class=\"col-md-4 col-sm-4\">");
-                        out.println("<button type=\"submit\" class=\"caja-piso\" >");
-                        out.println("<img src=\"" + inmuebleVO.getImagenes().get(0).getRuta()
-                                + "\" alt=\"placeholder\"/>");
-                        out.println("<div class=\"caption\">");
-                        out.println("<p>" + inmuebleVO.getPrecio() + " €<p>");
-                        out.println("<p>" + inmuebleVO.getNumHabitaciones() + " habitaciones</p>");
-                        out.println("<p>" + inmuebleVO.getSuperficie() + " m<sup>2</sup></p>");
-                        out.println("<p>" + inmuebleVO.getLocalizacion().getTipoVia().getNombreTipo() + " "
-                                + inmuebleVO.getLocalizacion().getNombreDir() + "</p>");
-                        out.println("<p>" + inmuebleVO.getLocalizacion().getPoblacion() + "</p>");
-                        out.println("</button>");
-                        out.println("</div>");
-                        out.println("</form>");
+
+                %>
+                <div class="col-md-4 col-sm-4">
+                    <form method="get" action="http://localhost:8080/infoInmueble.jsp">
+                        <input id="idInmueble" type="hidden" name="idInmueble" value="<%=inmuebleVO.getIdInmueble()%>">
+                        <button type="submit" class="caja-piso">
+                            <img src="<%=inmuebleVO.getImagenes().get(0).getRuta()%>" alt="Foto inmueble"/>
+                            <p><%=inmuebleVO.getPrecio()%> €<p>
+                            <p><%=inmuebleVO.getNumHabitaciones()%> habitaciones</p>
+                            <p><%=inmuebleVO.getSuperficie()%>  m<sup>2</sup></p>
+                            <p><%=inmuebleVO.getLocalizacion().getTipoVia().getNombreTipo()%> <%=inmuebleVO.getLocalizacion().getNombreDir()%></p>
+                            <p><%=inmuebleVO.getLocalizacion().getPoblacion()%></p>
+                        </button>
+                    </form>
+                </div>
+
+                <%
                     }
                 %>
             </div>

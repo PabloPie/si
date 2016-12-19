@@ -45,6 +45,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CerrarSesion</servlet-name>
+        <servlet-class>servlets.CerrarSesion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CerrarSesion</servlet-name>
+        <url-pattern>/cerrarSersion.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>InsertarInmueble</servlet-name>
         <servlet-class>servlets.InsertarInmueble</servlet-class>
         <multipart-config>

@@ -32,18 +32,29 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#mi-navbar"
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mi-navbar"
                     aria-expanded="false">
-                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Jaus</a>
+            <a class="navbar-brand" href="../index.html">Jaus</a>
         </div>
         <div class="collapse navbar-collapse" id="mi-navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-                    Mi cuenta</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Mi cuenta <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="../perfilActividad.jsp">Ver Actividad</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="../perfil.jsp">Modificar Perfil</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="cerrarSersion.do">Cerrar sesión</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -65,9 +76,11 @@
                             <input name="precio" id="precio" type="number" class="form-control"
                                    placeholder="Precio en euros" value="<%=request.getParameter("precio")%>">
                             <% if (errores.containsKey("precio")) {
-                                out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                out.println("<span class=\"help-block\" >" + errores.get("precio") + "</span >");
-                            }
+                            %>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <span class="help-block"><%=errores.get("precio")%></span>
+                            <%
+                                }
                             %>
                         </div>
                     </div>
@@ -78,9 +91,11 @@
                                    placeholder="Superficie en metros cuadrados"
                                    value="<%=request.getParameter("superficie")%>">
                             <% if (errores.containsKey("superficie")) {
-                                out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                out.println("<span class=\"help-block\" >" + errores.get("superficie") + "</span >");
-                            }
+                            %>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <span class="help-block"><%=errores.get("superficie")%></span>
+                            <%
+                                }
                             %>
                         </div>
                     </div>
@@ -91,10 +106,11 @@
                                    placeholder="Numero de habitaciones"
                                    value="<%=request.getParameter("num-habitaciones")%>">
                             <% if (errores.containsKey("num-habitaciones")) {
-                                out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                out.println("<span class=\"help-block\" >" + errores.get("num-habitaciones") +
-                                        "</span >");
-                            }
+                            %>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <span class="help-block"><%=errores.get("num-habitaciones")%></span>
+                            <%
+                                }
                             %>
                         </div>
                     </div>
@@ -104,10 +120,11 @@
                             <input name="num-bagnos" id="num-bagnos" type="number" class="form-control"
                                    placeholder="Numero de baños" value="<%=request.getParameter("num-bagnos")%>">
                             <% if (errores.containsKey("num-bagnos")) {
-                                out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                out.println("<span class=\"help-block\" >" + errores.get("num-bagnos") +
-                                        "</span >");
-                            }
+                            %>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <span class="help-block"><%=errores.get("num-bagnos")%></span>
+                            <%
+                                }
                             %>
                         </div>
                     </div>
@@ -117,9 +134,11 @@
                             <input name="planta" id="planta" type="number" class="form-control" placeholder="Planta"
                                    value="<%=request.getParameter("planta")%>">
                             <% if (errores.containsKey("planta")) {
-                                out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                out.println("<span class=\"help-block\" >" + errores.get("planta") + "</span >");
-                            }
+                            %>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <span class="help-block"><%=errores.get("planta")%></span>
+                            <%
+                                }
                             %>
                         </div>
                     </div>
@@ -135,8 +154,11 @@
                                                 String.valueOf(t.getIdTipo()).equals(request.getParameter("tipo-inmueble"))) {
                                             sel = "selected";
                                         }
-                                        out.println("<option " + sel + " value=\"" + t.getIdTipo() + "\">" +
-                                                t.getNombreTipo() + "</option>");
+                                %>
+                                <option <%=sel%> value="<%=t.getIdTipo()%>">
+                                    <%=t.getNombreTipo()%>
+                                </option>
+                                <%
                                     }
                                 %>
                             </select>
@@ -154,9 +176,11 @@
                                 request.getParameter("vendeAlquila").equals("alquila") ? " checked" : ""%>>Se
                                 alquila</label>
                             <% if (errores.containsKey("vendeAlquila")) {
-                                out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                out.println("<span class=\"help-block\" >" + errores.get("vendeAlquila") + "</span >");
-                            }
+                            %>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <span class="help-block"><%=errores.get("vendeAlquila")%></span>
+                            <%
+                                }
                             %>
                         </div>
                     </div>
@@ -180,15 +204,20 @@
                                                     String.valueOf(pais.getIdPais()).equals(request.getParameter("pais"))) {
                                                 sel = "selected";
                                             }
-                                            out.println("<option " + sel + " value=\"" + pais.getIdPais() + "\">" +
-                                                    pais.getNombrePais() + "</option>");
+                                    %>
+                                    <option <%=sel%> value="<%=pais.getIdPais()%>">
+                                        <%=pais.getNombrePais()%>
+                                    </option>
+                                    <%
                                         }
                                     %>
                                 </select>
                                 <% if (errores.containsKey("pais")) {
-                                    out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                    out.println("<span class=\"help-block\" >" + errores.get("pais") + "</span >");
-                                }
+                                %>
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>;
+                                <span class="help-block"><%=errores.get("pais")%></span>
+                                <%
+                                    }
                                 %>
                             </div>
                         </div>
@@ -210,9 +239,11 @@
                                     %>
                                 </select>
                                 <% if (errores.containsKey("provincia")) {
-                                    out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                    out.println("<span class=\"help-block\" >" + errores.get("provincia") + "</span >");
-                                }
+                                %>
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%=errores.get("provincia")%></span>
+                                <%
+                                    }
                                 %>
                             </div>
                         </div>
@@ -222,9 +253,11 @@
                                 <input name="poblacion" class="form-control" type="text" id="poblacion"
                                        placeholder="Poblacion" <%="value=\"" + request.getParameter("poblacion") + "\""%>>
                                 <% if (errores.containsKey("poblacion")) {
-                                    out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                    out.println("<span class=\"help-block\" >" + errores.get("poblacion") + "</span >");
-                                }
+                                %>
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%=errores.get("poblacion")%></span>
+                                <%
+                                    }
                                 %>
                             </div>
                         </div>
@@ -234,9 +267,11 @@
                                 <input name="codigoPostal" class="form-control" type="number" id="codigoPostal"
                                        placeholder="Codigo postal" <%="value=\"" + request.getParameter("codigoPostal") + "\""%>>
                                 <% if (errores.containsKey("codigoPostal")) {
-                                    out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                    out.println("<span class=\"help-block\" >" + errores.get("codigoPostal") + "</span >");
-                                }
+                                %>
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%=errores.get("codigoPostal")%></span>
+                                <%
+                                    }
                                 %>
                             </div>
                         </div>
@@ -251,15 +286,20 @@
                                             if (String.valueOf(t.getIdVia()).equals(request.getParameter("tipo-via"))) {
                                                 sel = "selected";
                                             }
-                                            out.println("<option " + sel + " value=\"" + t.getIdVia() + "\">" +
-                                                    t.getNombreTipo() + "</option>");
+                                    %>
+                                    <option <%=sel%> value="<%=t.getIdVia()%>">
+                                        <%=t.getNombreTipo()%>
+                                    </option>
+                                    <%
                                         }
                                     %>
                                 </select>
                                 <% if (errores.containsKey("tipo-via")) {
-                                    out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                    out.println("<span class=\"help-block\" >" + errores.get("tipo-via") + "</span >");
-                                }
+                                %>
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%=errores.get("tipo-via")%></span>
+                                <%
+                                    }
                                 %>
                             </div>
                         </div>
@@ -269,9 +309,11 @@
                                 <input name="nombre-calle" class="form-control" type="text" id="nombre-calle"
                                        placeholder="Nombre de la calle" <%="value=\"" + request.getParameter("nombre-calle") + "\""%>>
                                 <% if (errores.containsKey("nombre-calle")) {
-                                    out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                    out.println("<span class=\"help-block\" >" + errores.get("nombre-calle") + "</span >");
-                                }
+                                %>
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%=errores.get("nombre-calle")%></span>
+                                <%
+                                    }
                                 %>
                             </div>
                         </div>
@@ -281,9 +323,11 @@
                                 <input name="numero-calle" class="form-control" type="number" id="numero-calle"
                                        placeholder="Numero de la via" <%="value=\"" + request.getParameter("numero-calle") + "\""%>>
                                 <% if (errores.containsKey("numero-calle")) {
-                                    out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                    out.println("<span class=\"help-block\" >" + errores.get("numero-calle") + "</span >");
-                                }
+                                %>
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%=errores.get("numero-calle")%></span>
+                                <%
+                                    }
                                 %>
                             </div>
                         </div>
@@ -305,8 +349,12 @@
                                             }
                                         }
                                     }
-                                    out.println("<label class=\"checkbox-inline\"><input name=\"extras\" " + sel + " type=\"checkbox\" " +
-                                            "value=\"" + e.getIdExtra() + "\">" + e.getNombre() + "</label>");
+                            %>
+                            <label class="checkbox-inline">
+                                <input name="extras" <%=sel%> type="checkbox" value="<%=e.getIdExtra()%>">
+                                <%=e.getNombre()%>
+                            </label>
+                            <%
                                 }
                             %>
                         </div>
@@ -318,9 +366,11 @@
                                 <textarea name="descripcion" class="form-control" id="id-mensaje"
                                           rows="3"><%=request.getParameter("descripcion")%></textarea>
                                 <% if (errores.containsKey("descripcion")) {
-                                    out.println("<span class=\"glyphicon glyphicon-remove form-control-feedback\" ></span >");
-                                    out.println("<span class=\"help-block\" >" + errores.get("descripcion") + "</span >");
-                                }
+                                %>
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%=errores.get("descripcion")%></span>
+                                <%
+                                    }
                                 %>
                             </div>
                             <div class="form-group">

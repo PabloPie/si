@@ -1,26 +1,17 @@
 package servlets;
 
-import com.sun.deploy.net.HttpRequest;
 import db.WebFacade;
-import db.dao.GestorDeConexionesBD;
-import db.dao.UsuarioRegistradoDAO;
 import db.vo.*;
 
-import javax.ejb.Local;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.HttpRetryException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 
 public class UpdateUserdata extends HttpServlet {
 
