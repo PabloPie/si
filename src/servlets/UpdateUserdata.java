@@ -18,34 +18,35 @@ public class UpdateUserdata extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if(request.getParameter("envio").equals("delete")){
+        if (request.getParameter("envio").equals("delete")) {
             String user = (String) request.getSession().getAttribute("currentSessionUser");
-            System.err.println("Se va a borrar al usuario"+user);
+            System.err.println("Se va a borrar al usuario" + user);
             WebFacade.borrarUsuario(user);
             request.getSession().invalidate();
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.html");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.html");
             requestDispatcher.forward(request, response);
-        }else if(request.getParameter("envio").equals("actualiza")) {
+        } else if (request.getParameter("envio").equals("actualiza")) {
             System.err.println("Se procede a actualizar los datos del usuario.");
             HashMap<String, String> errores = new HashMap<>();
             UsuarioRegistradoVO userVO;
-            userVO = comprobarErrores(request,errores);
+            userVO = comprobarErrores(request, errores);
             if (userVO != null) {
-                if(userVO.getLocation()!=null) {
+                if (userVO.getLocation() != null) {
                     if (!WebFacade.existeLocalizacion(userVO.getLocation())) {
                         WebFacade.insertarLocalizacion(userVO.getLocation());
-                    }else{
+                    } else {
                         userVO.setLocation(WebFacade.obtenerLocalizacion(userVO.getLocation()));
                     }
                 }
                 WebFacade.actualizarUsuario(userVO);
-                response.sendRedirect("perfil.jsp");
+                response.sendRedirect(request.getContextPath() + "/perfil.jsp");
             } else {
-                request.setAttribute("errores",errores);
+                request.setAttribute("errores", errores);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/perfilError.jsp");
                 requestDispatcher.forward(request, response);
             }
-        }else{}
+        } else {
+        }
     }
 
     private UsuarioRegistradoVO comprobarErrores(HttpServletRequest request, HashMap<String, String> errores) throws ServletException,
@@ -55,18 +56,18 @@ public class UpdateUserdata extends HttpServlet {
         String poblacion = request.getParameter("poblacion");
         String nombredir = request.getParameter("direccion");
         int numerodir = 0;
-        if(!request.getParameter("numdir").equals("")){
+        if (!request.getParameter("numdir").equals("")) {
             numerodir = Integer.parseInt(request.getParameter("numdir"));
         }
         int cp = 0;
-        if(!request.getParameter("cp").equals("")){
+        if (!request.getParameter("cp").equals("")) {
             cp = Integer.parseInt(request.getParameter("cp"));
         }
         LocalizacionVO localizacion = null;
         if (!poblacion.equals("") || !nombredir.equals("") || numerodir != 0 || cp != 0) {
-            localizacion = comprobarLocalizacion(request,errores);
+            localizacion = comprobarLocalizacion(request, errores);
             if (localizacion == null) {
-                errores.put("invalidLocation","Si se desea añadir localización se deben rellenar todos los campos.");
+                errores.put("invalidLocation", "Si se desea añadir localización se deben rellenar todos los campos.");
                 return null;
             }
         }
@@ -76,8 +77,8 @@ public class UpdateUserdata extends HttpServlet {
         String apellidos = request.getParameter("apellidos");
         String fecha = request.getParameter("fecha");
         LocalDate date = null;
-        if(!fecha.equals("")) {
-            fecha=parseFecha(fecha);
+        if (!fecha.equals("")) {
+            fecha = parseFecha(fecha);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             date = LocalDate.parse(fecha, dtf);
 
@@ -90,12 +91,12 @@ public class UpdateUserdata extends HttpServlet {
         userVO.setLocation(localizacion);
         String pass = request.getParameter("password");
         String repass = request.getParameter("repassword");
-        if(!pass.equals("")){
-            if(pass.equals(repass)){
+        if (!pass.equals("")) {
+            if (pass.equals(repass)) {
                 pass = WebFacade.hashPass(pass);
                 userVO.setClaveEncriptada(pass);
-            }else{
-                errores.put("passError","Las contraseñas no coinciden.");
+            } else {
+                errores.put("passError", "Las contraseñas no coinciden.");
             }
         }
 
@@ -104,12 +105,12 @@ public class UpdateUserdata extends HttpServlet {
 
     private String parseFecha(String fecha) {
         String date[] = fecha.split("-");
-        return date[2]+"-"+date[1]+"-"+date[0];
+        return date[2] + "-" + date[1] + "-" + date[0];
     }
 
-    private LocalizacionVO comprobarLocalizacion(HttpServletRequest request, HashMap<String, String> errores){
-           int idPais=0,idProvincia=0,codigoPostal=0,idTipoVia=0,numeroCalle=0;
-           String poblacion=null,nombreCalle=null;
+    private LocalizacionVO comprobarLocalizacion(HttpServletRequest request, HashMap<String, String> errores) {
+        int idPais = 0, idProvincia = 0, codigoPostal = 0, idTipoVia = 0, numeroCalle = 0;
+        String poblacion = null, nombreCalle = null;
         try {
             idPais = comprobarParamteroIdPais(request.getParameter("pais"));
         } catch (IllegalArgumentException e) {
@@ -166,7 +167,6 @@ public class UpdateUserdata extends HttpServlet {
             return null;
         }
     }
-
 
 
     private int comprobarParamteroIdPais(String idPais) throws IllegalArgumentException {
@@ -231,8 +231,8 @@ public class UpdateUserdata extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        doPost(request,response);
+            throws ServletException, IOException {
+        doPost(request, response);
     }
 }
 

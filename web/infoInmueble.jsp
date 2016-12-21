@@ -51,7 +51,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Jaus</a>
+            <a class="navbar-brand" href="<%=request.getContextPath()%>/index.html">Jaus</a>
         </div>
 
         <%
@@ -65,13 +65,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Mi cuenta <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
+                        <li><a href="<%=request.getContextPath()%>/publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="perfilActividad.jsp">Ver Actividad</a></li>
+                        <li><a href="<%=request.getContextPath()%>/perfilActividad.jsp">Ver Actividad</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="perfil.jsp">Modificar Perfil</a></li>
+                        <li><a href="<%=request.getContextPath()%>/perfil.jsp">Modificar Perfil</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="cerrarSersion.do">Cerrar sesión</a></li>
+                        <li><a href="<%=request.getContextPath()%>/cerrarSersion.do">Cerrar sesión</a></li>
                     </ul>
                 </li>
             </ul>

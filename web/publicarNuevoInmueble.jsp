@@ -20,7 +20,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/infoInmueble.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/infoInmueble.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -38,7 +38,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Jaus</a>
+            <a class="navbar-brand" href="<%=request.getContextPath()%>/index.html">Jaus</a>
         </div>
         <div class="collapse navbar-collapse" id="mi-navbar">
             <ul class="nav navbar-nav navbar-right">
@@ -46,13 +46,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Mi cuenta <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
+                        <li><a href="<%=request.getContextPath()%>/publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="perfilActividad.jsp">Ver Actividad</a></li>
+                        <li><a href="<%=request.getContextPath()%>/perfilActividad.jsp">Ver Actividad</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="perfil.jsp">Modificar Perfil</a></li>
+                        <li><a href="<%=request.getContextPath()%>/perfil.jsp">Modificar Perfil</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="cerrarSersion.do">Cerrar sesión</a></li>
+                        <li><a href="<%=request.getContextPath()%>/cerrarSersion.do">Cerrar sesión</a></li>
                     </ul>
                 </li>
             </ul>
@@ -65,7 +65,7 @@
             <div class="page-header">
                 <h1>Publicar nuevo anuncio</h1>
             </div>
-            <form class="form-horizontal" action="http://localhost:8080/insertarInmueble.do"
+            <form class="form-horizontal" action="<%=request.getContextPath()%>/insertarInmueble.do"
                   enctype="multipart/form-data" method="post">
                 <fieldset>
                     <legend>Informacion del piso</legend>

@@ -8,7 +8,6 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 import db.dao.*;
 import db.vo.*;
-import sun.java2d.UnixSurfaceManagerFactory;
 
 public class WebFacade {
     public static void insertarLocalizacion(LocalizacionVO location) {

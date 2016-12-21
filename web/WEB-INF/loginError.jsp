@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
 <!--
 Eventually by HTML5 UP
@@ -19,13 +20,13 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/main.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/main.css"/>
     <!--[if lte IE 8]>
-    <script src="../assets/js/ie/html5shiv.js"></script><![endif]-->
+    <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="../assets/css/ie8.css"/><![endif]-->
+    <link rel="stylesheet" href="assets/css/ie8.css"/><![endif]-->
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="../assets/css/ie9.css"/><![endif]-->
+    <link rel="stylesheet" href="assets/css/ie9.css"/><![endif]-->
 
 </head>
 <body>
@@ -43,7 +44,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 </header>
 
 <!-- Signup Form -->
-<form id="signup-form" method="post" action="http://localhost:8080/resultadoBusqueda.jsp">
+<form id="signup-form" method="post" action="<%=request.getContextPath()%>/resultadoBusqueda.jsp">
     <fieldset>
         <legend style="color:white">Me interesa:</legend>
         <input type="radio" name="Selector" id="idComprar" value="seVenden"/><label for="idComprar">Comprar</label>
@@ -64,7 +65,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                 <h4 class="modal-title" id="myModalLabel">Formulario de Registro</h4>
             </div>
             <div class="modal-body">
-                <form action="http://localhost:8080/Registro.do" method="POST">
+                <form action="<%=request.getContextPath()%>/Registro.do" method="POST">
                     <label for="IDUsuarioR">Nombre de usuario:</label><input type="text" name="user"
                                                                              id="IDUsuarioR"/><br/>
                     <label for="IDNombre">Nombre:</label><input type="text" name="nombre" id="IDNombre"/><br/>
@@ -97,7 +98,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                 <h4 class="modal-title" id="ModalIS">Iniciar sesión:</h4>
             </div>
             <div class="modal-body">
-                <form action="http://localhost:8080/Login.do" method="POST">
+                <form action="<%=request.getContextPath()%>/Login.do" method="POST">
 
                     <label for="IDUsuario">Usuario</label><input type="text" name="user" id="IDUsuario"/><br/>
                     <label for="IDPassword">Contraseña</label><input type="password" name="password"

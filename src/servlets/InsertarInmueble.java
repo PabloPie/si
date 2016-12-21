@@ -36,7 +36,7 @@ public class InsertarInmueble extends HttpServlet {
                 e.printStackTrace();
             }
             int id = InmuebleDAO.insertarInmueble(inmuebleVO, connection);
-            response.sendRedirect("/infoInmueble.jsp?idInmueble=" + id);
+            response.sendRedirect(request.getContextPath() + "/infoInmueble.jsp?idInmueble=" + id);
         } else {
             request.setAttribute("errores", errores);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/errorPublicarInmueble.jsp");

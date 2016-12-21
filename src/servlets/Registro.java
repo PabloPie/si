@@ -22,14 +22,13 @@ public class Registro extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         UsuarioRegistradoVO userVO;
         userVO = comprobarErrores(request);
-        if (userVO!=null){
+        if (userVO != null) {
             WebFacade.crearUsuario(userVO);
-            response.sendRedirect("index.html");
-        }
-        else{
+            response.sendRedirect(request.getContextPath() + "/index.html");
+        } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/ErrorRegistro.jsp");
             requestDispatcher.forward(request, response);
         }
@@ -47,36 +46,36 @@ public class Registro extends HttpServlet {
 
         boolean err = false;
 
-        if(password.equals("") || usuario.equals("") || nombre.equals("") || apellidos.equals("") || mail.equals("") || remail.equals("") ||
-                repassword.equals("")){
+        if (password.equals("") || usuario.equals("") || nombre.equals("") || apellidos.equals("") || mail.equals("") || remail.equals("") ||
+                repassword.equals("")) {
             request.setAttribute("CampoVacio", "ERROR: TODOS LOS CAMPOS DEBEN SER RELLENADOS");
             err = true;
         }
 
-        if(!repassword.equals(password)){
+        if (!repassword.equals(password)) {
             request.setAttribute("mismatchP", "Contraseña no coincide");
             err = true;
         }
-        if(!mail.equals(remail)){
+        if (!mail.equals(remail)) {
             request.setAttribute("mismatchM", "Mail no coincide.");
             err = true;
         }
-        if(WebFacade.existeUsuario(usuario)){
+        if (WebFacade.existeUsuario(usuario)) {
             request.setAttribute("usuarioExiste", "Usuario ya existente.");
             err = true;
         }
-        if(!err){
+        if (!err) {
             password = WebFacade.hashPass(password);
             return new UsuarioRegistradoVO(usuario, nombre,
                     apellidos, password, 0,
                     mail, null, null);
-        }else {
+        } else {
             return null;
         }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        doGet(request,response);
+            throws ServletException, IOException {
+        doGet(request, response);
     }
 }

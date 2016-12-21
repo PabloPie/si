@@ -14,7 +14,7 @@ public class CerrarSesion extends HttpServlet {
             throws ServletException, IOException{
         HttpSession session = request.getSession(true);
         session.invalidate();
-        response.sendRedirect("/index.html");
+        response.sendRedirect( request.getContextPath() + "/index.html");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

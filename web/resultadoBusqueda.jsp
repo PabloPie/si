@@ -21,7 +21,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/resultadoBusqueda.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/resultadoBusqueda.css"/>
 
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -46,7 +46,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Jaus</a>
+            <a class="navbar-brand" href="<%=request.getContextPath()%>/index.html">Jaus</a>
         </div>
 
         <%
@@ -60,13 +60,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Mi cuenta <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
+                        <li><a href="<%=request.getContextPath()%>/publicarNuevoInmueble.jsp">Publicar inmueble</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="perfilActividad.jsp">Ver Actividad</a></li>
+                        <li><a href="<%=request.getContextPath()%>/perfilActividad.jsp">Ver Actividad</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="perfil.jsp">Modificar Perfil</a></li>
+                        <li><a href="<%=request.getContextPath()%>/perfil.jsp">Modificar Perfil</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="cerrarSersion.do">Cerrar sesión</a></li>
+                        <li><a href="<%=request.getContextPath()%>/cerrarSersion.do">Cerrar sesión</a></li>
                     </ul>
                 </li>
             </ul>
@@ -86,7 +86,7 @@
         <div class="col-md-3 col-sm-12">
             <div class="row">
                 <div class="col-md-12 col-sm-12 sidebar opciones-filtrado">
-                    <form class="nav nav-sidebar" method="post" action="http://localhost:8080/resultadoBusqueda.jsp">
+                    <form class="nav nav-sidebar" method="post" action="<%=request.getContextPath()%>/resultadoBusqueda.jsp">
                         <input type="hidden" name="Buscar" value="<%=request.getParameter("Buscar")%>">
                         <input type="hidden" name="Selector" value="<%=request.getParameter("Selector")%>">
                         <fieldset>
@@ -174,7 +174,7 @@
 
                 %>
                 <div class="col-md-4 col-sm-4">
-                    <form method="get" action="http://localhost:8080/infoInmueble.jsp">
+                    <form method="get" action="<%=request.getContextPath()%>/infoInmueble.jsp">
                         <input id="idInmueble" type="hidden" name="idInmueble" value="<%=inmuebleVO.getIdInmueble()%>">
                         <button type="submit" class="caja-piso">
                             <img src="<%=inmuebleVO.getImagenes().get(0).getRuta()%>" alt="Foto inmueble"/>

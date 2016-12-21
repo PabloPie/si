@@ -16,15 +16,14 @@ import java.io.IOException;
 public class Login extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String password = request.getParameter("password");
         String usuario = request.getParameter("user");
-        if (WebFacade.comprobarUsuario(usuario,password) && !password.equals("") && !usuario.equals("")){
-            session.setAttribute("currentSessionUser",usuario);
-            response.sendRedirect("perfil.jsp");
-        }
-        else {
+        if (WebFacade.comprobarUsuario(usuario, password) && !password.equals("") && !usuario.equals("")) {
+            session.setAttribute("currentSessionUser", usuario);
+            response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+        } else {
             session.invalidate();
             request.setAttribute("errorLogin", "Usuario o password inválido.");
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/loginError.jsp");
@@ -33,7 +32,7 @@ public class Login extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        doGet(request,response);
+            throws ServletException, IOException {
+        doGet(request, response);
     }
 }
